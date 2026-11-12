@@ -1,8 +1,8 @@
 // 3D sets for the Kosovo film: map, power plants, winter town and renewables landscape.
 import * as C from '../../engine/core.js';
-const { THREE, V, scene, clamp, sstep, lerp, pop, toon, basic, M, outline, segMatrix, tube, mergeGeometries } = C;
+const { THREE, V, scene, clamp, sstep, lerp, pop, toon, basic, M, outline, segMatrix, mergeGeometries } = C;
 export const GEO = await (await fetch(new URL('./geo.json', import.meta.url))).json();
-import { m4, q4, one, tm, at, box, cyl, rnd, sb, hideInst, RED } from '../../engine/parts/kit.js';
+import { m4, q4, tm, at, box, cyl, rnd, sb, hideInst, RED } from '../../engine/parts/kit.js';
 import { Puffs, ctower, stack, pylons, turbine, spin, popAll, hillMesh, hy, farHills, dress } from '../../engine/parts/energy.js';
 export { m4, q4, hideInst, spin, popAll, Puffs };
 

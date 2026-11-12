@@ -2,7 +2,7 @@
 // plus a desk and a few props. Draw your interface with normal canvas calls, then call screen.update().
 import * as C from '../core.js';
 import { tm, at, box, cyl } from './kit.js';
-const { THREE, M, outline } = C;
+const { THREE, M } = C;
 
 export function screen(w, h, pxW, pxH) {       // w,h in world units; pxW,pxH canvas resolution
   const canvas = document.createElement('canvas'); canvas.width = pxW; canvas.height = pxH; const ctx = canvas.getContext('2d');

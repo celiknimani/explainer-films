@@ -1,6 +1,6 @@
 // Starter film: two short scenes that use the whole workflow. Copy this folder to begin a new film (npm run new <name>).
 import * as C from '../../engine/core.js';
-import { header, label, call, card, footer, GRN, NAVY } from '../../engine/overlay.js';
+import { header, call, card, footer, GRN, NAVY } from '../../engine/overlay.js';
 import { ENV, env, aim, finish, frameOf, at as onScreen, play, loadJSON } from '../../engine/stage.js';
 import { at, box } from '../../engine/parts/kit.js';
 import { turbine, spin, popAll, dress } from '../../engine/parts/energy.js';

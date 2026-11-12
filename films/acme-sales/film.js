@@ -1,11 +1,11 @@
 // ACME Invoices: sales template (problem, product, features, proof, call to action).
 // ACME is a placeholder brand. Edit brand.json and script.json, then change the interface drawn in drawUI().
 import * as C from '../../engine/core.js';
-import { ctx, INK, PAPER, RED, GRN, text, plate, pill, label, call, header, footer, card, badge } from '../../engine/overlay.js';
+import { ctx, INK, RED, GRN, plate, label, call, header, footer, card, badge } from '../../engine/overlay.js';
 import { ENV, env, aim, finish, frameOf, play, loadJSON, ground } from '../../engine/stage.js';
 import { m4, q4, at, rnd } from '../../engine/parts/kit.js';
 import { laptop, phone, desk, mug, plant, rr } from '../../engine/parts/devices.js';
-const { THREE, V, W, H, scene, clamp, sstep, ease, pop, lerp, proj, camKeys, toon, outline } = C;
+const { THREE, V, scene, clamp, sstep, ease, pop, lerp, proj, camKeys, toon, outline } = C;
 const CUES = await loadJSON('./cues.json', import.meta.url), B = await loadJSON('./brand.json', import.meta.url);
 const ORDER = ['problem', 'product', 'features', 'proof', 'cta'];
 

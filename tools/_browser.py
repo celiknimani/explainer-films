@@ -1,8 +1,10 @@
 """Shared helpers for the render tools: a static file server on the repo root and a headless Chrome page."""
 import os, http.server, threading, functools
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-CPU_ARGS = ['--use-gl=angle', '--use-angle=swiftshader', '--enable-unsafe-swiftshader', '--ignore-gpu-blocklist', '--no-sandbox']
-GPU_ARGS = ['--ignore-gpu-blocklist', '--enable-gpu', '--use-angle=default', '--no-sandbox']
+# Chrome will not start as root with its sandbox on (containers, CI), so the sandbox is dropped only in that case.
+ROOT_ARGS = ['--no-sandbox'] if hasattr(os, 'geteuid') and os.geteuid() == 0 else []
+CPU_ARGS = ['--use-gl=angle', '--use-angle=swiftshader', '--enable-unsafe-swiftshader', '--ignore-gpu-blocklist'] + ROOT_ARGS
+GPU_ARGS = ['--ignore-gpu-blocklist', '--enable-gpu', '--use-angle=default'] + ROOT_ARGS
 
 class _Quiet(http.server.SimpleHTTPRequestHandler):
     def log_message(self, *a): pass

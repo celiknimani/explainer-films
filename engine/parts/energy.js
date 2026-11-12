@@ -1,7 +1,7 @@
 // Energy and landscape parts: smoke and steam puffs, cooling towers, stacks, pylons with wires, wind turbines, hills, trees and fields.
 import * as C from '../core.js';
-import { m4, q4, tm, at, box, cyl, rnd, sb, RED } from './kit.js';
-const { THREE, V, clamp, sstep, lerp, pop, toon, basic, M, outline, tube, mergeGeometries } = C;
+import { m4, q4, tm, at, cyl, rnd, sb, RED } from './kit.js';
+const { THREE, V, sstep, pop, toon, basic, M, outline, tube, mergeGeometries } = C;
 
 // ---------------------------------------------------------------- shared builders
 export function Puffs(parent, n) {

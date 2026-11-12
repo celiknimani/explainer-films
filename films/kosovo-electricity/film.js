@@ -3,7 +3,7 @@ import * as C from '../../engine/core.js';
 import * as S from './sets.js';
 import { ctx, INK, PAPER, NAVY, RED, YEL, GRN, COAL, BLUE, fmt, font, text, plate, pill, label, call, header, footer, flash, card, hbar, leader, badge } from '../../engine/overlay.js';
 import { ENV, env, aim, finish, frameOf, play, loadJSON, SUNLOW } from '../../engine/stage.js';
-const { THREE, V, W, H, camera, clamp, sstep, ease, pop, lerp, proj, camKeys } = C;
+const { THREE, V, clamp, sstep, ease, pop, lerp, proj, camKeys } = C;
 const { MAP, PLANT, TOWN, RES, mp, mini, pl, rs } = S;
 const CUES = await loadJSON('./cues.json', import.meta.url);
 const ORDER = ['title', 'coal', 'old', 'gap', 'imports', 'res', 'plan', 'hurdles', 'outro'];

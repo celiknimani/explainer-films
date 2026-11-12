@@ -1,7 +1,7 @@
 import * as THREE from 'three';
 import { mergeGeometries } from 'three/addons/utils/BufferGeometryUtils.js';
 // Sea and ship parts: water with wake and foam, islands, lofted hulls, oars, sails, crew, buildShip().
-import { V, W, H, clamp, sstep, lerp, ease, pop, scene, camera, toon, basic, outline, M, tube, segMatrix, rod, HORIZON, SUN, STYLE } from '../core.js';
+import { V, clamp, lerp, scene, toon, basic, outline, M, tube, segMatrix, rod, HORIZON, SUN } from '../core.js';
 const ux = V(1, 0, 0), up = V(0, 1, 0), tmpQ = new THREE.Quaternion(), tmpS = V(1, 1, 1), tmpM = new THREE.Matrix4();
 
 export const PAL = { wood: '#B97A3E', dark: '#7A4A22', light: '#DDA865', bronze: '#D09A2E', sail: '#F8EDCB', rope: '#3A2E28', skin: '#E2A77C',

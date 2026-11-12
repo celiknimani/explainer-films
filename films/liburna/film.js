@@ -1,28 +1,18 @@
 // The Liburna: engineering film about the Illyrian warship (anatomy, sewn planks, oars, bireme, ram).
 import * as C from './engine.js';
-const { THREE, V, W, H, scene, camera, renderer, clamp, sstep, ease, pop, lerp, PAL, toon, basic, M, outline, proj, camKeys, sec, hullPoint, hullGeo, tube, rod, segMatrix, figure } = C;
+import { font, pill, label, flash } from '../../engine/overlay.js';
+const { THREE, V, W, H, scene, camera, renderer, clamp, sstep, ease, pop, lerp, PAL, toon, basic, M, outline, proj, camKeys, sec, hullPoint, hullGeo, tube, segMatrix, figure } = C;
 const CUES = await (await fetch(new URL('./cues.json', import.meta.url))).json();
 const ORDER = ['title', 'anatomy', 'sewn', 'oars', 'bireme', 'ram', 'outro'];
 const out = document.getElementById('out'), ctx = out.getContext('2d');
 const INK = '#2B2A33', PAPER = '#F6EFE0', NAVY = '#27496D', RED = '#D9503F', SEA = '#2E8C9B', SEA2 = '#1F6F7E', FOAM = '#DDF2F2';
 
 // =============================================================== 2D overlay helpers
-const font = (w, s) => { ctx.font = `${w} ${s}px Inter, sans-serif`; };
 function text(s, x, y, size, color = INK, w = 600, a = 1, align = 'left', halo = 0) {
   if (a <= 0) return; ctx.save(); ctx.globalAlpha = a; font(w, size); ctx.textAlign = align;
   if (halo) { ctx.lineJoin = 'round'; ctx.lineWidth = halo; ctx.strokeStyle = PAPER; ctx.strokeText(s, x, y); }
   ctx.fillStyle = color; ctx.fillText(s, x, y); ctx.restore();
 }
-function pill(s, x, y, o = {}) {
-  const { a = 1, size = 34, align = 'l', bg = '#FFFFFF', fg = INK, scale = 1 } = o; if (a <= 0 || scale <= 0) return;
-  const lines = s.split('\n'); font(600, size); const w = Math.max(...lines.map(l => ctx.measureText(l).width)) + 44, h = lines.length * size * 1.28 + 26;
-  const x0 = align === 'l' ? x : align === 'c' ? x - w / 2 : x - w;
-  ctx.save(); ctx.globalAlpha = a; ctx.translate(x0 + w / 2, y); ctx.scale(scale, scale); ctx.translate(-w / 2, -h / 2);
-  ctx.beginPath(); ctx.roundRect(5, 7, w, h, 18); ctx.fillStyle = 'rgba(30,28,39,0.25)'; ctx.fill();
-  ctx.beginPath(); ctx.roundRect(0, 0, w, h, 18); ctx.fillStyle = bg; ctx.fill(); ctx.lineWidth = 3.5; ctx.strokeStyle = INK; ctx.stroke();
-  ctx.fillStyle = fg; ctx.textAlign = 'left'; lines.forEach((l, i) => ctx.fillText(l, 22, 13 + size * 0.95 + i * size * 1.28)); ctx.restore();
-}
-const label = (s, x, y, t, t0, o = {}) => { const k = pop(t, t0, 0.35); if (k > 0 && (o.t1 === undefined || t < o.t1)) pill(s, x, y, { ...o, scale: k }); };
 function call(s, P, lx, ly, t, t0, o = {}) {   // P: screen anchor
   if (o.t1 !== undefined && t > o.t1) return; const a = ease(t, t0, 0.25); if (a <= 0 || !P.ok) return;
   ctx.save(); ctx.lineCap = 'round'; ctx.strokeStyle = INK; ctx.lineWidth = 9; ctx.beginPath(); ctx.moveTo(P.x, P.y); ctx.lineTo(P.x + (lx - P.x) * a, P.y + (ly - P.y) * a); ctx.stroke();
@@ -56,7 +46,6 @@ function wipe(t, D, first, last) { const d = 0.38;
   if (!last && t > D - d) wave(-300, -300 + (W + 600) * sstep((t - (D - d)) / d));
   if (last && t > D - 0.7) { ctx.fillStyle = `rgba(246,239,224,${clamp((t - (D - 0.7)) / 0.6)})`; ctx.fillRect(0, 0, W, H); }
   if (first && t < 0.5) { ctx.fillStyle = `rgba(246,239,224,${1 - t / 0.5})`; ctx.fillRect(0, 0, W, H); } }
-function flash(a, c = '255,255,255') { if (a > 0) { ctx.fillStyle = `rgba(${c},${clamp(a)})`; ctx.fillRect(0, 0, W, H); } }
 function card(x, y, big, small, t, t0, col) { const k = pop(t, t0, 0.4); if (k <= 0) return; const b = clamp((t - t0) / 0.35);
   ctx.save(); ctx.translate(x, y - 500 * (1 - b) * (1 - b)); ctx.rotate(-0.1 * (1 - b)); ctx.scale(k, k);
   ctx.beginPath(); ctx.roundRect(-240, -83, 500, 190, 26); ctx.fillStyle = 'rgba(30,28,39,0.28)'; ctx.fill();

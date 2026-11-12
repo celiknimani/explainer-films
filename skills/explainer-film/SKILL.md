@@ -18,7 +18,7 @@ Read `README.md` for setup and `docs/api.md` for the function reference before w
 3. **Write `script.json`.** One list of phrases per scene; 5 to 9 scenes for a two to three minute film. Plan at about 2.5 words per second.
    - A phrase is the smallest thing you can time to. Start a new phrase wherever something should appear on screen.
    - Write numbers as words ("one thousand six hundred and twenty-four"). Say rounded numbers and show exact ones on screen.
-   - A phrase ending in a comma or colon runs into the next one; anything else gets a pause.
+   - A full pause follows only a phrase that ends a sentence (. ? !); commas and colons run on.
    - Respell names the voice may get wrong and check with the phonemizer before generating.
 4. **Generate cues:** `npm run narrate <name>`. Note each scene's length.
 5. **Storyboard in a comment or note:** for each scene, the set, the camera path, and what appears at which cue.
