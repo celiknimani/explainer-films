@@ -2,7 +2,9 @@
  "voice": "bm_george",
  "speed": 1.04,
  "lang": "en-gb",
- "tail": 2.6,
+ "pause": 0.32,
+ "hold": 0.7,
+ "tail": 0.7,
  "scenes": {
   "title": [
    "Meet the liburna:",

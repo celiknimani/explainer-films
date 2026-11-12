@@ -22,7 +22,7 @@ for sc in names:
     for ch in S['scenes'][sc]:
         s, sr = k.create(ch, voice=S.get('voice', 'bm_george'), speed=S.get('speed', 1.04), lang=S.get('lang', 'en-gb'))
         nz = np.where(np.abs(s) > 0.01)[0]; s = s[max(0, nz[0] - 600):nz[-1] + 1500]
-        gap = short if ch[-1] in ',:' else pause            # phrases ending in a comma or colon run on
+        gap = pause if ch[-1] in '.?!' else short           # a full pause only after a sentence end; commas and colons run on
         q.append(round(t, 2)); out += [s, np.zeros(int(gap * sr), np.float32)]; t += len(s) / sr + gap
     sf.write(os.path.join(d, 'narr', f'{sc}.wav'), np.concatenate(out), 24000)
     cues[sc] = {'q': q, 'D': round(t + (tail if sc == names[-1] else S.get('hold', 0.8)), 1)}

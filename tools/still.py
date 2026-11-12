@@ -11,7 +11,9 @@ a = ap.parse_args(); port = serve(); ims = []
 with sync_playwright() as p:
     b = launch(p, a.gpu); pg = open_film(b, port, a.film, a.style); info = pg.evaluate('window.info'); names = [s['n'] for s in info]
     for job in a.jobs:
-        sc, t = job.split(':'); i = int(sc) if sc.isdigit() else names.index(sc); t0 = time.time()
+        sc, t = job.split(':')
+        if not sc.isdigit() and sc not in names: b.close(); raise SystemExit(f'No scene "{sc}" in {a.film}. Scenes: {", ".join(names)}')
+        i = int(sc) if sc.isdigit() else names.index(sc); t0 = time.time()
         if float(t) > info[i]['D']: print(f'note: {names[i]} is only {info[i]["D"]}s long; {t}s is past its end and will show the transition')
         d = pg.evaluate(f'window.frame({i},{t})'); ims.append(Image.open(io.BytesIO(base64.b64decode(d.split(",")[1]))).convert('RGB')); print(names[i], t, '%.2fs' % (time.time() - t0))
     b.close()
