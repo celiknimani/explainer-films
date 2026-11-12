@@ -13,7 +13,18 @@ export const V = (x, y, z) => new THREE.Vector3(x, y, z);
 export const clamp = (x, a = 0, b = 1) => Math.max(a, Math.min(b, x));
 export const sstep = x => { x = clamp(x); return x * x * (3 - 2 * x); };
 export const ease = (t, t0, d = 0.5) => { const x = clamp((t - t0) / d); return 1 - Math.pow(1 - x, 3); };
-export const pop = (t, t0, d = 0.45) => { const x = clamp((t - t0) / d); return x <= 0 ? 0 : 1 + 0.25 * Math.sin(x * Math.PI) * (1 - x); };
+// Motion personality: how things enter and how the camera moves. play() sets one per film so films do not all move alike.
+// overshoot: bounce on entrances. speed: entrance tempo. enter: 2D entrance type. camEase: camera easing. drift: gentle camera float.
+export const MOTIONS = {
+  bouncy: { overshoot: 0.25, speed: 1, enter: 'pop', camEase: 'smooth', drift: 0 },
+  snappy: { overshoot: 0.08, speed: 1.5, enter: 'slide', camEase: 'sharp', drift: 0 },
+  smooth: { overshoot: 0, speed: 0.7, enter: 'fade', camEase: 'smooth', drift: 1 },
+  playful: { overshoot: 0.5, speed: 1.1, enter: 'drop', camEase: 'spring', drift: 0.5 },
+};
+export const TRANSITIONS = ['bands', 'iris', 'blinds', 'push', 'fade'];
+export const MOTION = { name: 'bouncy', transition: 'bands', ...MOTIONS.bouncy };
+export function setMotion(name, transition) { if (MOTIONS[name]) Object.assign(MOTION, { name }, MOTIONS[name]); if (transition) MOTION.transition = transition; return MOTION; }
+export const pop = (t, t0, d = 0.45) => { const x = clamp((t - t0) / (d / MOTION.speed)); return x <= 0 ? 0 : 1 + MOTION.overshoot * Math.sin(x * Math.PI) * (1 - x); };
 export const lerp = (a, b, k) => a + (b - a) * k;
 
 // ---------- renderer / scene
@@ -131,13 +142,15 @@ export function segMatrix(a, b, th, out = new THREE.Matrix4(), th2 = th) {   // 
 }
 export function rod(a, b, r, mat, ol = 0) { const m = new THREE.Mesh(new THREE.BoxGeometry(1, 1, 1), mat); m.applyMatrix4(segMatrix(a, b, r * 2)); m.castShadow = true; if (ol) outline(m, ol); return m; }
 // ---------- camera keys
+const camEase = x => MOTION.camEase === 'sharp' ? (x < 0.5 ? 16 * x ** 5 : 1 - (-2 * x + 2) ** 5 / 2) : MOTION.camEase === 'spring' ? 1 + 2.0 * (x - 1) ** 3 + 1.0 * (x - 1) ** 2 : sstep(x);
 export function camKeys(t, keys, frame) {   // keys: {t, p:[x,y,z], l:[x,y,z], f}
   let a = keys[0], b = keys[0], k = 0;
   if (t >= keys[keys.length - 1].t) a = b = keys[keys.length - 1];
-  else for (let i = 0; i < keys.length - 1; i++) if (t >= keys[i].t && t <= keys[i + 1].t) { a = keys[i]; b = keys[i + 1]; k = sstep((t - a.t) / Math.max(1e-6, b.t - a.t)); break; }
+  else for (let i = 0; i < keys.length - 1; i++) if (t >= keys[i].t && t <= keys[i + 1].t) { a = keys[i]; b = keys[i + 1]; k = camEase((t - a.t) / Math.max(1e-6, b.t - a.t)); break; }
   const mix3 = (u, v) => [lerp(u[0], v[0], k), lerp(u[1], v[1], k), lerp(u[2], v[2], k)];
   const p = mix3(a.p, b.p), l = mix3(a.l, b.l); camera.fov = lerp(a.f || 35, b.f || 35, k); camera.updateProjectionMatrix();
   const P = frame ? frame.rel(...p) : V(...p), Lk = frame ? frame.rel(...l) : V(...l);
+  if (MOTION.drift) { const m = MOTION.drift * 0.006 * P.distanceTo(Lk); P.x += m * Math.sin(t * 0.9 + 1.3); P.y += m * 0.6 * Math.sin(t * 0.7); P.z += m * Math.sin(t * 0.8 + 2.1); }
   camera.position.copy(P); camera.up.set(0, 1, 0); camera.lookAt(Lk); return { P, L: Lk };
 }
 export function proj(v) { const p = v.clone().project(camera); return { x: (p.x * 0.5 + 0.5) * W, y: (-p.y * 0.5 + 0.5) * H, ok: p.z < 1 }; }

@@ -29,7 +29,7 @@ Read `README.md` for setup and `docs/api.md` for the function reference before w
    - Order inside a scene: `env`, pose models, `camKeys`, `finish()`, then overlay calls.
    - Keep sets about 1,500 units apart and show one at a time, so their shadows and fog do not interact.
 7. **Check still frames, then fix, then check again.** `npm run still <name> scene:seconds ...` at the busiest moment of each scene, plus one mid-transition. Open the image and look for: overlapping labels, text off the edge, leader lines crossing, models hidden behind foreground objects, empty halves of the frame, tiny models. Do this before any full render.
-8. **Sound:** copy an example `audio.py`. Place effects with the same cue arithmetic as the scene.
+8. **Give the film its own feel.** Pick a motion, a transition, a music mood and a sound kit that suit the subject, and do not reuse the combination from the previous film. Set `motion` and `transition` in `play()`; set the mood and kit in `audio.py` (`Mix(name, kit=...)`, `m.music(mood)`). Left unset, all four are derived from the film's name. Options are listed in `docs/api.md`. Place sound effects with the same cue arithmetic as the scene.
 9. **Render and mix:** `npm run film <name> -- --skip-narration`. On a machine with a graphics card add `--gpu`. To change one scene later: `npm run render <name> <scene>` then `npm run mix <name>`.
 10. **Verify the finished file.** Pull frames from the mp4 at several times and look at them. Check every on-screen number against `SOURCES.md`. Tell the user which figures are your own arithmetic and anything you could not verify.
 

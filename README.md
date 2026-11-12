@@ -54,6 +54,8 @@ Animations start on narration cues (`q[1] + 0.3`), so changing the script re-tim
 
 To redo one scene: `npm run render my-film intro`, then `npm run mix my-film`.
 
+Each film also gets its own feel: a motion style, a scene transition, a music mood and a sound-effect kit. They are picked from the film's name unless you set them. See [`docs/api.md`](docs/api.md#motion-and-transitions).
+
 ## Styles
 
 ![Styles](docs/thumbs/styles.jpg)

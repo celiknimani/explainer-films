@@ -7,8 +7,9 @@ This repo makes narrated videos in code. When asked to make or change a film, fo
 3. **Cues.** `npm run narrate <name>`. Read the printed scene lengths. Aim for 2.5 words per second when estimating.
 4. **Scenes.** Write `film.js`. Every animation start time is a cue plus an offset (`q[1] + 0.3`), never an absolute number. Scene functions are pure functions of `t`.
 5. **Stills before renders.** `npm run still <name> scene:seconds ...` at the busiest moments of every scene. Read the image. Fix overlaps, clipped text, things hidden behind other things. Repeat until clean. A full render is slow; never use it to find layout bugs.
-6. **Render.** `npm run film <name> -- --skip-narration`. Re-render single scenes with `npm run render <name> <scene>` and rebuild with `npm run mix <name>`.
-7. **Check the result.** Extract a few frames from the final mp4 and look at them. Compare every on-screen number with `SOURCES.md`.
+6. **Feel.** Choose a motion, transition, music mood and sound kit that fit the subject and differ from the last film (`docs/api.md` lists them). Unset, they are derived from the film's name.
+7. **Render.** `npm run film <name> -- --skip-narration`. Re-render single scenes with `npm run render <name> <scene>` and rebuild with `npm run mix <name>`.
+8. **Check the result.** Extract a few frames from the final mp4 and look at them. Compare every on-screen number with `SOURCES.md`.
 
 Rules:
 - Do not put claims, testimonials or figures in a sales film that the user has not supplied. Use labelled placeholders.

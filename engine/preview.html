@@ -1,7 +1,7 @@
 <!doctype html><html><head><meta charset="utf-8"><title>explainer-films preview</title>
 <style>body{margin:0;background:#15161c;color:#e9e9ef;font:14px system-ui,sans-serif}#out{display:block;width:100vw;max-height:calc(100vh - 64px);object-fit:contain;background:#000}
 #bar{display:flex;gap:12px;align-items:center;padding:10px 16px;height:44px}button,select{font:inherit;padding:6px 12px;border-radius:8px;border:1px solid #444;background:#23252e;color:inherit;cursor:pointer}
-input[type=range]{flex:1}#info{min-width:330px;font-variant-numeric:tabular-nums;text-align:right;color:#b9bacb}</style></head><body>
+input[type=range]{flex:1}#info{min-width:480px;font-variant-numeric:tabular-nums;text-align:right;color:#b9bacb}</style></head><body>
 <canvas id="gl" width="1920" height="1080" style="display:none"></canvas><canvas id="out" width="1920" height="1080"></canvas>
 <div id="bar"><button id="play">Play</button><input id="seek" type="range" min="0" max="1" step="0.01" value="0"><span id="info">loading...</span>
 <select id="style"><option>toon</option><option>paper</option><option>clay</option><option>blueprint</option><option>neon</option></select></div>
@@ -18,7 +18,7 @@ else {
   const audio = new Audio(`../films/${film}/out/narr.wav`); audio.addEventListener('canplaythrough', () => { hasAudio = true; });   // narration plays if it has been generated
   // The readout shows scene-local seconds: the same numbers the still tool takes (scene:seconds).
   const draw = () => { let i = info.length - 1; while (i > 0 && t < starts[i]) i--; const lt = Math.min(t - starts[i], info[i].D - 1e-3); window.frame(i, lt, true);
-    $('seek').value = t; $('info').textContent = `${info[i].n}:${lt.toFixed(2)}   |   ${t.toFixed(1)} / ${T.toFixed(1)} s`; };
+    $('seek').value = t; $('info').textContent = `${info[i].n}:${lt.toFixed(2)}   |   ${t.toFixed(1)} / ${T.toFixed(1)} s` + (window.motion ? `   |   ${window.motion.motion}, ${window.motion.transition}` : ''); };
   const set = on => { playing = on; $('play').textContent = on ? 'Pause' : 'Play'; if (hasAudio) { if (on) { audio.currentTime = t; audio.play(); } else audio.pause(); } };
   $('play').onclick = () => set(!playing); $('seek').oninput = e => { t = +e.target.value; if (hasAudio) audio.currentTime = t; draw(); };
   document.addEventListener('keydown', e => { if (e.code === 'Space') { e.preventDefault(); set(!playing); } });

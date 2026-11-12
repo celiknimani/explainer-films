@@ -77,14 +77,45 @@ All overlay functions take the scene time `t` and a start time `t0` and animate 
 
 **devices.js**: `laptop()` and `phone()` return `{ g, scr }` where `scr.ctx` is a canvas you draw the interface on, then call `scr.update()`. `laptop().open(angle)` moves the lid and `laptop().point(px, py)` gives the screen position of an interface pixel for callouts. Props: `desk()`, `mug(colour)`, `plant()`.
 
+## Motion and transitions
+
+Each film has a motion personality and a transition, set in `play()`:
+
+```js
+play(order, CUES, scenes, { motion: 'snappy', transition: 'push' });
+```
+
+| `motion` | Entrances | Camera |
+|---|---|---|
+| `bouncy` | Pop with overshoot, cards drop in | Smooth |
+| `snappy` | Fast slide-up, almost no bounce | Sharp starts and stops |
+| `smooth` | Slow fades | Smooth, with a gentle float |
+| `playful` | Big bounce and wobble | Slight overshoot |
+
+`transition`: `bands`, `iris`, `blinds`, `push`, `fade` or `cut`. Colours come from `wipe: { c1, c2 }`.
+
+Leave both out and they are picked from the film's folder name, so a new film does not move like the last one. Try others without editing: `npm run still my-film intro:3 -- --motion smooth --transition iris`, or add `&motion=smooth&transition=iris` to the preview URL.
+
 ## Sound: tools/synth.py
 
 ```python
 from synth import *
-m = Mix('my-film'); m.music('bright')      # presets: bright, upbeat, calm, or pass your own dict
+m = Mix('my-film', kit='wood')             # sound-effect kit: classic, soft, wood, digital, or 'auto'
+m.music('warm')                            # or m.music() to let the film's name pick a mood
 m.transitions()                            # a whoosh at each scene change
 q = m.q('intro'); m.ev('intro', q[0] + 0.3, pop_())
 m.write()
 ```
+
+| Mood | Feel |
+|---|---|
+| `warm` | Major key, electric piano and strings, half-time beat, flute lead |
+| `playful` | Fast major, marimba, shuffle, flute lead |
+| `tech` | Dorian, sixteenth-note plucks, four-on-the-floor, keys lead |
+| `folk` | Mixolydian, plucked strings, hand drums, flute lead |
+| `tense` | Minor, marimba ostinato, pulsing bass, no snare |
+| `cinematic` | Slow minor, strings, low drums, bell lead |
+
+Within a mood, the key, tempo, chord loop, arpeggio and melody are generated from a seed, by default the film's name. The same film always gets the same tune; `m.music('warm', seed=2)` gives another one. `bright`, `upbeat` and `calm` are three fixed tunes kept for films already made with them.
 
 Effects: `pop_`, `tick`, `thud`, `whoosh`, `riser`, `buzz`, `bell`. Place them with the same cue arithmetic the scene uses, so sound and picture stay together.

@@ -6,10 +6,10 @@ from playwright.sync_api import sync_playwright
 from PIL import Image
 from _browser import serve, launch, open_film
 
-ap = argparse.ArgumentParser(); ap.add_argument('film'); ap.add_argument('jobs', nargs='+'); ap.add_argument('--style', default='toon'); ap.add_argument('--gpu', action='store_true'); ap.add_argument('--out', default=None); ap.add_argument('--full', action='store_true', help='keep full 1920x1080 frames')
+ap = argparse.ArgumentParser(); ap.add_argument('film'); ap.add_argument('jobs', nargs='+'); ap.add_argument('--style', default='toon'); ap.add_argument('--gpu', action='store_true'); ap.add_argument('--out', default=None); ap.add_argument('--full', action='store_true', help='keep full 1920x1080 frames'); ap.add_argument('--motion'); ap.add_argument('--transition')
 a = ap.parse_args(); port = serve(); ims = []
 with sync_playwright() as p:
-    b = launch(p, a.gpu); pg = open_film(b, port, a.film, a.style); info = pg.evaluate('window.info'); names = [s['n'] for s in info]
+    b = launch(p, a.gpu); pg = open_film(b, port, a.film, a.style, extra=''.join(f'&{k}={v}' for k, v in (('motion', a.motion), ('transition', a.transition)) if v)); print('motion:', pg.evaluate('window.motion || null')); info = pg.evaluate('window.info'); names = [s['n'] for s in info]
     for job in a.jobs:
         sc, t = job.split(':')
         if not sc.isdigit() and sc not in names: b.close(); raise SystemExit(f'No scene "{sc}" in {a.film}. Scenes: {", ".join(names)}')

@@ -20,11 +20,11 @@ def launch(p, gpu=False):
     if exe: kw['executable_path'] = exe          # otherwise Playwright's bundled Chromium is used
     return p.chromium.launch(**kw)
 
-def open_film(browser, port, film, style='toon', verbose=True):
+def open_film(browser, port, film, style='toon', verbose=True, extra=''):
     pg = browser.new_page(viewport={'width': 1920, 'height': 1080})
     if verbose: pg.on('console', lambda m: print('console:', m.text[:400]) if m.type in ('error', 'warning') and 'ReadPixels' not in m.text and 'toNonIndexed' not in m.text else None)
     pg.on('pageerror', lambda e: print('PAGE ERROR', str(e)[:600], flush=True))
-    pg.goto(f'http://127.0.0.1:{port}/engine/player.html?film={film}&style={style}')
+    pg.goto(f'http://127.0.0.1:{port}/engine/player.html?film={film}&style={style}{extra}')
     pg.wait_for_function('window.ready===true || window.filmError', timeout=120000)
     err = pg.evaluate('window.filmError || null')
     if err: raise SystemExit(f'Film failed to load: {err}')

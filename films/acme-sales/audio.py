@@ -2,7 +2,7 @@
 import os, sys
 sys.path.insert(0, os.path.join(os.path.dirname(os.path.abspath(__file__)), "..", "..", "tools"))
 from synth import *
-m = Mix("acme-sales"); m.music("upbeat"); m.transitions()
+m = Mix("acme-sales", kit="digital"); m.music("tech"); m.transitions()
 q = m.q("problem")
 for i in range(16): m.ev("problem", 0.2 + i * 0.07, tick(0.18, 900 + 40 * i), 0.3 + 0.4 * (i % 2))
 for t in (q[0] + 1.4, q[0] + 2.2, q[0] + 3.0): m.ev("problem", t, pop_())

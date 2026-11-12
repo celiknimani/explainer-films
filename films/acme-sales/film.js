@@ -83,4 +83,4 @@ function sCta(t, D, q) {
   stage(t, 0, { open: 1.85, fly: 2, phone: 1, ui: FULL, cam: [{ t: 0, p: [0.4, 3.0, 8.1], l: [0.5, 2.25, 0], f: 35 }, { t: D, p: [0.2, 3.0, 8.6], l: [0.4, 2.5, 0], f: 35 }] });
   lockup(960, 250, pop(t, q[0] + 0.2, 0.5), 84); label('Start free at ' + B.url, 960, 440, t, q[0] + 1.3, { align: 'c', size: 44, bg: B.accent });
 }
-play(ORDER, CUES, { problem: sProblem, product: sProduct, features: sFeatures, proof: sProof, cta: sCta }, { wipe: { c1: B.color, c2: B.accent } });
+play(ORDER, CUES, { problem: sProblem, product: sProduct, features: sFeatures, proof: sProof, cta: sCta }, { motion: 'snappy', transition: 'push', wipe: { c1: B.color, c2: B.accent } });

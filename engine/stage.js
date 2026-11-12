@@ -37,7 +37,13 @@ export const loadJSON = async (name, base) => (await fetch(new URL(name, base)))
 
 // Register a film with the player. scenes: { name: (t, D, q, gt) => void }. cues: { name: { D, q: [...] } }.
 // t = seconds into the scene, D = scene length, q = narration cue times, gt = a running clock for looping motion.
+// opts.motion: bouncy | snappy | smooth | playful. opts.transition: bands | iris | blinds | push | fade | cut.
+// Left unset, both are picked from the film's folder name, so a new film does not move like the last one.
+// ?motion= and ?transition= in the URL override them for a quick look.
 export function play(order, cues, scenes, o = {}) {
+  const Q = new URLSearchParams(location.search), film = Q.get('film') || ''; let h = 2166136261; for (const ch of film) h = Math.imul(h ^ ch.charCodeAt(0), 16777619) >>> 0;
+  const names = Object.keys(C.MOTIONS); C.setMotion(Q.get('motion') || o.motion || names[h % names.length], Q.get('transition') || o.transition || C.TRANSITIONS[(h >>> 8) % C.TRANSITIONS.length]);
+  window.motion = { motion: C.MOTION.name, transition: C.MOTION.transition };
   window.frame = (i, t, raw = false) => { const n = order[i], D = cues[n].D, q = cues[n].q; if (o.before) o.before();
     scenes[n](t, D, q, t + i * 23.7); if (o.wipe !== false) wipe(t, D, i === 0, i === order.length - 1, o.wipe || {}); return raw ? 0 : out.toDataURL('image/jpeg', 0.93); };
   window.info = order.map(n => ({ n, D: cues[n].D })); window.ready = true; }

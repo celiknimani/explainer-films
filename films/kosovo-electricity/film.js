@@ -166,4 +166,4 @@ function sOutro(t, D, q, gt) {
   footer('Sources: ERO Annual Report 2025 | GAP Institute, June 2026 | Energy Strategy 2022-2031 | Kosovo Customs | Terawatt Times (CBAM)', t, q[2] + 3.4);
 }
 
-play(ORDER, CUES, { title: sTitle, coal: sCoal, old: sOld, gap: sGap, imports: sImports, res: sRes, plan: sPlan, hurdles: sHurdles, outro: sOutro }, { wipe: { open: '34,44,85' } });
+play(ORDER, CUES, { title: sTitle, coal: sCoal, old: sOld, gap: sGap, imports: sImports, res: sRes, plan: sPlan, hurdles: sHurdles, outro: sOutro }, { motion: 'bouncy', transition: 'bands', wipe: { open: '34,44,85' } });
