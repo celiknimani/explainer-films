@@ -29,7 +29,7 @@ npm run preview starter        # opens a live preview in your browser, with a ti
 npm run film starter           # narration, render, sound and final mp4 in films/starter/out/
 ```
 
-The first narration run downloads the voice model (about 340 MB) to `~/.cache/explainer-films`.
+The first narration run downloads the voice model (about 350 MB) to `~/.cache/explainer-films`.
 
 ## Your first film
 
@@ -88,7 +88,7 @@ skills/explainer-film/  instructions for AI coding agents
 docs/api.md             reference for the engine and parts
 ```
 
-A film is a folder: `script.json`, `cues.json`, `film.js`, an optional `audio.py`, and any data it needs. Generated files (`narr/`, `out/`) are not committed.
+A film is a folder: `script.json`, `cues.json`, `film.js`, an optional `audio.py` (without one the film gets a default music bed), and any data it needs. Generated files (`narr/`, `out/`) are not committed.
 
 ## Using it with an AI coding agent
 

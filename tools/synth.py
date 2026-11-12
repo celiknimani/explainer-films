@@ -96,3 +96,6 @@ class Mix:
             subprocess.run(['ffmpeg', '-v', 'error', '-y', *ins, '-filter_complex', ';'.join(fl), '-map', '[v]', '-t', str(self.T), os.path.join(self.out, 'narr.wav')], check=True)
         else: print('no narration found (run tools/narrate.py first); writing music and effects only')
         print(f'audio written for {self.film}: {self.T:.1f}s')
+
+if __name__ == '__main__':      # default soundtrack for films without their own audio.py:  python3 tools/synth.py <film> [preset]
+    m = Mix(sys.argv[1]); m.music(sys.argv[2] if len(sys.argv) > 2 else 'calm'); m.transitions(); m.write()

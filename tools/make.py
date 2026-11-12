@@ -6,5 +6,5 @@ T = os.path.dirname(os.path.abspath(__file__)); py = sys.executable; run = lambd
 if not a.skip_narration: run(os.path.join(T, 'narrate.py'), a.film)
 run(os.path.join(T, 'render.py'), a.film, '--style', a.style, *(['--gpu'] if a.gpu else []))
 audio = os.path.join(T, '..', 'films', a.film, 'audio.py')
-if os.path.exists(audio): run(audio)
+run(audio) if os.path.exists(audio) else run(os.path.join(T, 'synth.py'), a.film)      # a film without audio.py gets a default soundtrack
 run(os.path.join(T, 'mix.py'), a.film)
