@@ -1,5 +1,9 @@
 # explainer-films
 
+[![License: MIT](https://img.shields.io/badge/license-MIT-blue.svg)](LICENSE)
+![Node 18+](https://img.shields.io/badge/node-18%2B-green.svg)
+![Python 3.10+](https://img.shields.io/badge/python-3.10%2B-green.svg)
+
 Narrated explainer, engineering and sales videos made entirely in code.
 
 You write a script. The narrator's timing drives the animation. A browser renders every frame. Every number, label and camera move lives in text files, so a film is updated by editing and re-rendering.
@@ -98,7 +102,7 @@ Built on three.js, the Kokoro voice model, the Inter typeface and Natural Earth 
 
 ## Contributing
 
-Questions and bug reports go in the issue tracker. Pull requests are welcome: before opening one, check that `npm run still starter intro:5` still renders.
+Questions and bug reports go in the issue tracker. Pull requests are welcome; see [`CONTRIBUTING.md`](CONTRIBUTING.md).
 
 ## License
 
