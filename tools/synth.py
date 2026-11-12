@@ -204,8 +204,9 @@ class Mix:
         m = np.stack(B, 1)
         for d, g in [(0.031, 0.2), (0.057, 0.16), (0.101, 0.1)]: k = int(d * sr); m[k:] += g * m[:-k]
         idx = np.arange(self.n); m *= (np.minimum(1, idx / (0.8 * sr)) * np.minimum(1, (self.n - idx) / (3.5 * sr)))[:, None]
-        # Loudness is set by average level, not peak, so every mood sits at the same volume under the narration.
-        m *= 0.028 * (level / 0.8) / np.sqrt((m ** 2).mean()); self.mus = np.tanh(m / 0.8) * 0.8; self.tune = dict(mood=mood, bpm=bpm, key=['C', 'C#', 'D', 'D#', 'E', 'F', 'F#', 'G', 'G#', 'A', 'A#', 'B'][root % 12] + ' ' + M['scale'], loop=prog)
+        # Loudness is set by average level, not peak, so every mood sits at the same volume under the narration
+        # (the target keeps the bed roughly 11 dB below the voice once mix.py has ducked it).
+        m *= 0.022 * (level / 0.8) / np.sqrt((m ** 2).mean()); self.mus = np.tanh(m / 0.8) * 0.8; self.tune = dict(mood=mood, bpm=bpm, key=['C', 'C#', 'D', 'D#', 'E', 'F', 'F#', 'G', 'G#', 'A', 'A#', 'B'][root % 12] + ' ' + M['scale'], loop=prog)
         print('music:', self.tune)
     def write(self):
         if self.mus is not None: sf.write(os.path.join(self.out, 'music.wav'), self.mus, sr)

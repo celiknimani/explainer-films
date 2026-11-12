@@ -2,7 +2,7 @@
 import os, sys
 sys.path.insert(0, os.path.join(os.path.dirname(os.path.abspath(__file__)), "..", "..", "tools"))
 from synth import *
-m = Mix("kosovo-electricity"); m.music("bright"); m.transitions()
+m = Mix("kosovo-electricity"); m.music("warm"); m.transitions()
 q=m.q('title'); m.ev('title',0.15,whoosh(1.6,0.35,300,3000)); m.ev('title',0.55,thud(0.5))
 for i in range(22): m.ev('title',q[0]+0.4+i*0.1,tick(0.16,1400+rng.integers(0,900)),0.3+0.4*rng.random())
 for i in range(3): m.ev('title',q[0]+0.1+i*0.45,thud(0.4))
