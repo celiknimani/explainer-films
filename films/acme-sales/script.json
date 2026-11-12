@@ -1,0 +1,7 @@
+{ "voice": "bm_george", "speed": 1.04, "lang": "en-gb", "tail": 2.2,
+  "scenes": {
+    "problem": ["Invoices live everywhere: email, spreadsheets, paper.", "Some get paid late. Some get lost."],
+    "product": ["Acme Invoices puts every invoice in one place."],
+    "features": ["Send an invoice in one click.", "Reminders go out on their own.", "And you always see who has paid."],
+    "proof": ["Teams get hours back every week, and get paid sooner."],
+    "cta": ["Try Acme Invoices free today."] } }

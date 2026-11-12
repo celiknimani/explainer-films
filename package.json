@@ -1,0 +1,20 @@
+{
+  "name": "explainer-films",
+  "version": "0.1.0",
+  "description": "Explainer, engineering and sales videos made entirely in code: three.js scenes, narration-driven timing, synthesized audio.",
+  "license": "MIT",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "preview": "node tools/preview.js",
+    "new": "node tools/new.js",
+    "still": "python3 tools/still.py",
+    "narrate": "python3 tools/narrate.py",
+    "render": "python3 tools/render.py",
+    "audio": "python3 tools/audio.py",
+    "mix": "python3 tools/mix.py",
+    "film": "python3 tools/make.py"
+  },
+  "dependencies": { "three": "0.160.0" },
+  "devDependencies": { "topojson-client": "^3.1.0", "world-atlas": "^2.0.2" }
+}

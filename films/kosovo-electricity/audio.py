@@ -1,0 +1,42 @@
+"""Music and sound effects for the Kosovo film. Effects are placed relative to narration cues, like the animation."""
+import os, sys
+sys.path.insert(0, os.path.join(os.path.dirname(os.path.abspath(__file__)), "..", "..", "tools"))
+from synth import *
+m = Mix("kosovo-electricity"); m.music("bright"); m.transitions()
+q=m.q('title'); m.ev('title',0.15,whoosh(1.6,0.35,300,3000)); m.ev('title',0.55,thud(0.5))
+for i in range(22): m.ev('title',q[0]+0.4+i*0.1,tick(0.16,1400+rng.integers(0,900)),0.3+0.4*rng.random())
+for i in range(3): m.ev('title',q[0]+0.1+i*0.45,thud(0.4))
+m.ev('title',q[1]+0.1,pop_())
+q=m.q('coal'); cut=q[1]-0.25
+for tt_ in (q[0]+1.6,q[0]+2.8,cut+0.8,cut+1.7,q[2]+1.4): m.ev('coal',tt_,pop_())
+m.ev('coal',cut-0.25,whoosh(0.6,0.5,800,8000)); m.ev('coal',q[2]-0.5,whoosh(1.4,0.3)); m.ev('coal',q[3]-0.4,whoosh(1.4,0.3))
+for i in range(3): m.ev('coal',q[3]+1.2+i*1.1,thud(0.7))
+q=m.q('old'); run0=q[2]+0.3; run1=q[3]+2.3
+for i in range(5): m.ev('old',q[0]+0.6+i*0.12,pop_(480+40*i,900+40*i,0.35)); m.ev('old',q[1]+0.4+i*0.3,tick(0.3,1200))
+m.ev('old',q[1]+3.3,pop_())
+for i in range(26): m.ev('old',run0+(run1-run0)*i/26,tick(0.22,700 if i%3 else 1500))
+m.ev('old',run0-0.2,whoosh(0.5,0.25)); m.ev('old',run1+0.2,buzz(0.35)); m.ev('old',q[4]+0.6,thud(0.7)); m.ev('old',q[4]+1.8,thud(0.7))
+q=m.q('gap'); m.ev('gap',q[0]+0.8,pop_()); m.ev('gap',q[1]+1.5,pop_())
+for i in range(34): m.ev('gap',q[1]-0.2+i*0.085,tick(0.12,2000+rng.integers(0,1200)),0.2+0.6*rng.random())
+m.ev('gap',q[2]-0.7,whoosh(0.7,0.3)); m.ev('gap',q[2],riser(3.8,0.38)); m.ev('gap',q[2]+3.85,thud(0.8)); m.ev('gap',q[2]+4.1,pop_()); m.ev('gap',q[3]+0.3,whoosh(0.7,0.3)); m.ev('gap',q[3]+0.9,buzz(0.3)); m.ev('gap',q[3]+1.7,pop_(700,350,0.5))
+q=m.q('imports')
+for i in range(4): m.ev('imports',q[0]+0.4+i*0.15,pop_(500+50*i,900+50*i,0.3))
+for i in range(26): m.ev('imports',q[1]+0.1+i*0.1,tick(0.2,1000+30*i))
+m.ev('imports',q[1]-0.3,whoosh(0.6,0.3)); m.ev('imports',q[1]+2.7,thud(0.6)); m.ev('imports',q[2]+0.4,pop_()); m.ev('imports',q[2]+1.7,pop_(600,800,0.4)); m.ev('imports',q[3]-0.2,whoosh(0.7,0.3)); m.ev('imports',q[3]+1.6,pop_()); m.ev('imports',q[4]+1.1,thud(0.8)); m.ev('imports',q[4]+2.7,pop_())
+q=m.q('res')
+for i_ in range(1,6): m.ev('res',q[i_]-0.1,whoosh(1.3,0.28,300,4000))
+for tt_ in (q[1]+1.5,q[2]+1.3,q[3]+1.3,q[4]+1.0,q[5]+2.3,q[5]+4.1): m.ev('res',tt_,pop_())
+for i in range(12): m.ev('res',q[5]+1.05+i*0.17,pop_(600+30*i,1000+30*i,0.3))
+q=m.q('plan')
+for tt_ in (q[1]+0.5,q[2]+0.6,q[3]+1.2): m.ev('plan',tt_,thud(0.7))
+for i in range(24): m.ev('plan',q[2]+0.45+i*0.09,tick(0.2,900+40*i))
+for f_ in range(4):
+    for i in range(6): m.ev('plan',q[2]+1.9+f_*0.5+i*0.06,tick(0.16,1700))
+for i in range(10): m.ev('plan',q[3]+0.65+i*0.12,pop_(420+30*i,760+30*i,0.3))
+m.ev('plan',q[4]-0.3,whoosh(0.7,0.3)); m.ev('plan',q[4]+0.4,riser(3.2,0.33)); m.ev('plan',q[4]+3.65,thud(0.7)); m.ev('plan',q[5]+1.7,pop_())
+q=m.q('hurdles'); cut=q[2]-0.25
+for tt_ in (q[1]+0.15,q[1]+0.5,q[1]+2.7,q[2]+0.15,q[2]+0.5,q[2]+4.3,q[3]+0.15,q[3]+0.5,q[3]+3.5): m.ev('hurdles',tt_,pop_())
+m.ev('hurdles',q[1]+5.3,pop_(700,350,0.5)); m.ev('hurdles',q[1]-0.4,whoosh(1.4,0.3)); m.ev('hurdles',cut-0.25,whoosh(0.6,0.5,800,8000)); m.ev('hurdles',cut+1.0,whoosh(1.8,0.25,300,3000)); m.ev('hurdles',q[3]-0.3,whoosh(1.3,0.3)); m.ev('hurdles',q[3]+0.3,whoosh(0.6,0.35)); m.ev('hurdles',q[3]+1.95,thud(1.0)); m.ev('hurdles',q[3]+1.97,tick(0.5,500))
+q=m.q('outro')
+for tt_ in (q[0]+0.6,q[1]+0.5,q[2]+1.1): m.ev('outro',tt_,thud(0.75)); m.ev('outro',tt_-0.3,whoosh(0.35,0.28))
+m.write()

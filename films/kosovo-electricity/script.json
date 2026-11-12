@@ -1,0 +1,65 @@
+{
+ "voice": "bm_george",
+ "speed": 1.04,
+ "lang": "en-gb",
+ "tail": 2.6,
+ "scenes": {
+  "title": [
+   "How does Kosovo keep the lights on?",
+   "Here is its electricity system, by the numbers."
+  ],
+  "coal": [
+   "Almost all of it starts in Obilitch, just outside Prishtina.",
+   "Two lignite plants, Kosovo A, and Kosovo B,",
+   "burn coal from the open-pit mine next door.",
+   "In twenty twenty-five, they made eighty-eight percent of the country's power."
+  ],
+  "old": [
+   "But they are old.",
+   "Kosovo A's working units date from the nineteen seventies. Kosovo B's, from the eighties.",
+   "And they break down often.",
+   "Last year, unit B two ran just fifty-six percent of the time.",
+   "Total output fell by almost thirteen percent."
+  ],
+  "gap": [
+   "Demand, meanwhile, keeps growing.",
+   "Many homes heat with electricity, so cold evenings push the grid to its limit.",
+   "On New Year's Eve, demand hit a record: one thousand six hundred and twenty-four megawatts.",
+   "All the working plants together add up to about one thousand two hundred and sixty."
+  ],
+  "imports": [
+   "The rest comes over the border.",
+   "In twenty twenty-five, Kosovo imported almost two thousand gigawatt hours,",
+   "forty-two percent more than the year before.",
+   "After exports, that covered about twenty-three percent of demand.",
+   "And it is costly: roughly two hundred and fifty million euros in eleven months."
+  ],
+  "res": [
+   "And renewables?",
+   "At the end of twenty twenty-five, Kosovo had one hundred and thirty-seven megawatts of wind,",
+   "one hundred and twenty-nine of hydro,",
+   "and thirty-six of solar.",
+   "Together they made about twelve percent of Kosovo's own generation.",
+   "In twenty twenty-six, the seventy megawatt Zatrich wind farm joined them."
+  ],
+  "plan": [
+   "The plan runs to twenty thirty-one.",
+   "Thirty-five percent of electricity from renewables.",
+   "Six hundred megawatts of wind, six hundred of solar,",
+   "and batteries: at least one hundred and seventy megawatts.",
+   "Renewable capacity has to grow about five times in six years.",
+   "Auctions have begun. The first solar park won at under forty-nine euros per megawatt hour."
+  ],
+  "hurdles": [
+   "Three things stand in the way.",
+   "One: the plan is to repair the old coal units and keep them running. Coal ends by twenty fifty at the latest.",
+   "Two: Kosovo has no carbon price, while the European Union now charges a carbon levy on imported electricity.",
+   "Three: the national energy and climate plan was still a draft in mid twenty twenty-six."
+  ],
+  "outro": [
+   "So: coal makes the power,",
+   "imports fill the winter gap,",
+   "and the next six years decide whether wind, sun and batteries can take over."
+  ]
+ }
+}

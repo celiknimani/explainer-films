@@ -1,0 +1,54 @@
+{
+ "voice": "bm_george",
+ "speed": 1.04,
+ "lang": "en-gb",
+ "tail": 2.6,
+ "scenes": {
+  "title": [
+   "Meet the liburna:",
+   "the fast raiding galley of the Liburnians, an Illyrian seafaring people of the eastern Adriatic."
+  ],
+  "anatomy": [
+   "The early form, from the sixth and fifth centuries BC, is known from a carving on the Novilara stele.",
+   "It has a prow that curves outward,",
+   "a ram at the waterline,",
+   "one mast with a single square sail,",
+   "and a single bank of oars, twenty-five on each side.",
+   "A steering oar sits at the stern.",
+   "The hull is light, low and open: built for speed."
+  ],
+  "sewn": [
+   "Liburnian boatbuilders sewed their hulls together.",
+   "Thin planks, about one and a half to two centimetres thick,",
+   "were laced with cord of flax and Spanish broom.",
+   "Small wooden pegs locked every stitch, about every two and a half centimetres.",
+   "No metal at all.",
+   "We know this from boats found at Zaton and Tsaska. Whether the war galleys were sewn the same way is not known."
+  ],
+  "oars": [
+   "Why is it so long?",
+   "Each rower needs about a metre of hull.",
+   "Twenty-five in a row means roughly twenty-five metres of benches alone.",
+   "A long, narrow hull is fast in a straight line, but slow to turn."
+  ],
+  "bireme": [
+   "In the first century BC, Rome adopted the design",
+   "and stacked the rowers on two levels.",
+   "The later Roman form had eighteen oars per side, in two rows.",
+   "Same muscle, shorter hull, quicker turns.",
+   "A deck and protection from missiles were added.",
+   "One modern reconstruction gives it fifty oars, and eighteen by three metres at the waterline."
+  ],
+  "ram": [
+   "The main weapon is the bronze ram at the bow.",
+   "It strikes the enemy hull below the waterline,",
+   "and the sea does the rest."
+  ],
+  "outro": [
+   "More than seven knots under oars,",
+   "about a metre of draft,",
+   "and a key role at the Battle of Actium in thirty-one BC.",
+   "Small, light and quick, the liburna became the core of Rome's provincial fleets."
+  ]
+ }
+}

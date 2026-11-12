@@ -1,0 +1,4 @@
+{ "voice": "bm_george", "speed": 1.04, "lang": "en-gb", "tail": 2.0,
+  "scenes": {
+    "intro": ["This is the starter film.", "Every label appears when the narrator reaches it."],
+    "numbers": ["Numbers arrive on cue too.", "Change the script, and the timing follows."] } }
