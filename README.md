@@ -2,29 +2,37 @@
 
 Narrated explainer, engineering and sales videos made entirely in code.
 
-You write a script. The narrator's timing drives the animation. A browser renders every frame.
+You write a script. The narrator's timing drives the animation. A browser renders every frame. Every number, label and camera move lives in text files, so a film is updated by editing and re-rendering.
 
 | Explainer | Engineering | Sales |
 |---|---|---|
 | ![Explainer](docs/thumbs/explainer.jpg) | ![Engineering](docs/thumbs/engineering.jpg) | ![Sales](docs/thumbs/sales.jpg) |
 | [`kosovo-electricity`](films/kosovo-electricity), 2 min 56 s | [`liburna`](films/liburna), 2 min 4 s | [`acme-sales`](films/acme-sales), 32 s |
 
-## Quick start
+[Install](#install) · [Usage](#usage) · [Styles](#styles) · [Layout](#layout) · [AI agents](#with-an-ai-coding-agent) · [Limits](#limits) · [API](#api) · [Maintainer](#maintainer) · [Credits](#credits) · [Contributing](#contributing) · [License](#license)
 
-Needs Node 18+, Python 3.10+ and ffmpeg.
+## Install
+
+Requires Node 18+, Python 3.10+ and ffmpeg.
 
 ```bash
 npm install
 pip install -r requirements.txt
 python3 -m playwright install chromium
+```
 
+## Usage
+
+Try the bundled starter film:
+
+```bash
 npm run preview starter     # live preview with a timeline scrubber
 npm run film starter        # full pipeline, writes films/starter/out/starter.mp4
 ```
 
 The first run downloads the voice model (about 350 MB).
 
-## Make a film
+Make your own:
 
 ```bash
 npm run new my-film         # or: npm run new my-film explainer | engineering | sales
@@ -63,13 +71,11 @@ docs/      API reference
 skills/    instructions for AI coding agents
 ```
 
-Function reference: [`docs/api.md`](docs/api.md).
-
 ## With an AI coding agent
 
 Scenes are code, so an agent can write them. [`AGENTS.md`](AGENTS.md) and the [skill](skills/explainer-film/SKILL.md) give it the procedure: verify facts, write the script, build scenes on the cues, check stills, render.
 
-## Good to know
+## Limits
 
 - **Output** is 1920 x 1080. Vertical and square are not supported yet.
 - **Speed:** rendering uses the CPU by default, about one frame per second per worker on a small cloud machine. `--gpu` uses your graphics card and is not benchmarked yet.
@@ -78,6 +84,22 @@ Scenes are code, so an agent can write them. [`AGENTS.md`](AGENTS.md) and the [s
 - **Voices:** English and a few other languages. Check yours before writing a script.
 - **Facts:** each example lists its sources in `SOURCES.md`. The sales template uses a placeholder brand and placeholder figures.
 
-## Licence
+## API
 
-MIT, see [`LICENSE`](LICENSE). Third-party components: [`THIRD_PARTY.md`](THIRD_PARTY.md).
+Function reference for the engine, parts and sound tools: [`docs/api.md`](docs/api.md).
+
+## Maintainer
+
+[Celik Nimani](https://github.com/celiknimani)
+
+## Credits
+
+Built on three.js, the Kokoro voice model, the Inter typeface and Natural Earth map data. Details in [`THIRD_PARTY.md`](THIRD_PARTY.md).
+
+## Contributing
+
+Questions and bug reports go in the issue tracker. Pull requests are welcome: before opening one, check that `npm run still starter intro:5` still renders.
+
+## License
+
+[MIT](LICENSE) © 2026 Celik Nimani
