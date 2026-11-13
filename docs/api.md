@@ -89,12 +89,21 @@ play(order, CUES, scenes, { motion: 'snappy', transition: 'push' });
 |---|---|---|
 | `bouncy` | Pop with overshoot, cards drop in | Smooth |
 | `snappy` | Fast slide-up, almost no bounce | Sharp starts and stops |
-| `smooth` | Slow fades | Smooth, with a gentle float |
+| `smooth` | Slow fades | Smooth |
 | `playful` | Big bounce and wobble | Slight overshoot |
 
 `transition`: `bands`, `iris`, `blinds`, `push`, `fade` or `cut`. Colours come from `wipe: { c1, c2 }`.
 
 Leave both out and they are picked from the film's folder name, so a new film does not move like the last one. Try others without editing: `npm run still my-film intro:3 -- --motion smooth --transition iris`, or add `&motion=smooth&transition=iris` to the preview URL.
+
+## Keeping the picture steady
+
+The overlay is fixed to the screen and the 3D scene is not, so any small back-and-forth movement in 3D shows up as wobble against the text. Four rules prevent it:
+
+- **The camera moves one way per shot.** Write a move as two or more `camKeys` keys and let it end. Never add a sine or other sway to the camera; the engine has no idle camera float for this reason.
+- **Hold the camera while text is pinned to a model.** A panel placed with `proj()` or `at()` is recomputed every frame, so under a moving camera it slides by fractions of a pixel and its text shimmers. End the camera move before the first pinned panel appears: the last key's time can be a cue, such as `{ t: q[2] - 0.4, ... }`. Callouts made with `call()` are fine under a moving camera, because only the leader line follows the point and the label stays put.
+- **Idle motion travels or turns one way.** Spinning rotors, flowing coins, rising steam and a turning globe read as life. A model that bobs or rocks about a fixed position on a slow loop reads as wobble.
+- **Check motion, not only layout.** A single still cannot show this. `npm run still my-film scene:6-11` draws six frames across a range; anything that should hold still must sit in the same place in all six.
 
 ## Sound: tools/synth.py
 

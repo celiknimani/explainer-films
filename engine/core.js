@@ -14,12 +14,13 @@ export const clamp = (x, a = 0, b = 1) => Math.max(a, Math.min(b, x));
 export const sstep = x => { x = clamp(x); return x * x * (3 - 2 * x); };
 export const ease = (t, t0, d = 0.5) => { const x = clamp((t - t0) / d); return 1 - Math.pow(1 - x, 3); };
 // Motion personality: how things enter and how the camera moves. play() sets one per film so films do not all move alike.
-// overshoot: bounce on entrances. speed: entrance tempo. enter: 2D entrance type. camEase: camera easing. drift: gentle camera float.
+// overshoot: bounce on entrances. speed: entrance tempo. enter: 2D entrance type. camEase: camera easing.
+// There is no idle camera sway on purpose: a camera that floats back and forth makes the picture wobble against the fixed overlay.
 export const MOTIONS = {
-  bouncy: { overshoot: 0.25, speed: 1, enter: 'pop', camEase: 'smooth', drift: 0 },
-  snappy: { overshoot: 0.08, speed: 1.5, enter: 'slide', camEase: 'sharp', drift: 0 },
-  smooth: { overshoot: 0, speed: 0.7, enter: 'fade', camEase: 'smooth', drift: 1 },
-  playful: { overshoot: 0.5, speed: 1.1, enter: 'drop', camEase: 'spring', drift: 0.5 },
+  bouncy: { overshoot: 0.25, speed: 1, enter: 'pop', camEase: 'smooth' },
+  snappy: { overshoot: 0.08, speed: 1.5, enter: 'slide', camEase: 'sharp' },
+  smooth: { overshoot: 0, speed: 0.7, enter: 'fade', camEase: 'smooth' },
+  playful: { overshoot: 0.5, speed: 1.1, enter: 'drop', camEase: 'spring' },
 };
 export const TRANSITIONS = ['bands', 'iris', 'blinds', 'push', 'fade'];
 export const MOTION = { name: 'bouncy', transition: 'bands', ...MOTIONS.bouncy };
@@ -150,7 +151,6 @@ export function camKeys(t, keys, frame) {   // keys: {t, p:[x,y,z], l:[x,y,z], f
   const mix3 = (u, v) => [lerp(u[0], v[0], k), lerp(u[1], v[1], k), lerp(u[2], v[2], k)];
   const p = mix3(a.p, b.p), l = mix3(a.l, b.l); camera.fov = lerp(a.f || 35, b.f || 35, k); camera.updateProjectionMatrix();
   const P = frame ? frame.rel(...p) : V(...p), Lk = frame ? frame.rel(...l) : V(...l);
-  if (MOTION.drift) { const m = MOTION.drift * 0.006 * P.distanceTo(Lk); P.x += m * Math.sin(t * 0.9 + 1.3); P.y += m * 0.6 * Math.sin(t * 0.7); P.z += m * Math.sin(t * 0.8 + 2.1); }
   camera.position.copy(P); camera.up.set(0, 1, 0); camera.lookAt(Lk); return { P, L: Lk };
 }
 export function proj(v) { const p = v.clone().project(camera); return { x: (p.x * 0.5 + 0.5) * W, y: (-p.y * 0.5 + 0.5) * H, ok: p.z < 1 }; }

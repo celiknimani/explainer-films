@@ -1,6 +1,7 @@
 """Render single frames to a contact sheet so layouts can be checked before a full render.
 Usage: python3 tools/still.py <film> [--style toon] [--gpu] [--out still.jpg] <scene>:<seconds> [...]
-<scene> is a scene name or its index, e.g.  python3 tools/still.py kosovo-electricity coal:7 gap:19.5"""
+<scene> is a scene name or its index, e.g.  python3 tools/still.py kosovo-electricity coal:7 gap:19.5
+A range gives six evenly spaced frames, to check motion: coal:7-12. Things that should hold still must not shift between them."""
 import sys, time, base64, io, argparse
 from playwright.sync_api import sync_playwright
 from PIL import Image
@@ -10,7 +11,12 @@ ap = argparse.ArgumentParser(); ap.add_argument('film'); ap.add_argument('jobs',
 a = ap.parse_args(); port = serve(); ims = []
 with sync_playwright() as p:
     b = launch(p, a.gpu); pg = open_film(b, port, a.film, a.style, extra=''.join(f'&{k}={v}' for k, v in (('motion', a.motion), ('transition', a.transition)) if v)); print('motion:', pg.evaluate('window.motion || null')); info = pg.evaluate('window.info'); names = [s['n'] for s in info]
-    for job in a.jobs:
+    jobs = []
+    for job in a.jobs:      # scene:a-b expands to six frames across the range
+        sc, t = job.rsplit(':', 1)
+        if '-' in t: t0, t1 = map(float, t.split('-')); jobs += [f'{sc}:{t0 + (t1 - t0) * i / 5:.2f}' for i in range(6)]
+        else: jobs.append(job)
+    for job in jobs:
         sc, t = job.split(':')
         if not sc.isdigit() and sc not in names: b.close(); raise SystemExit(f'No scene "{sc}" in {a.film}. Scenes: {", ".join(names)}')
         i = int(sc) if sc.isdigit() else names.index(sc); t0 = time.time()

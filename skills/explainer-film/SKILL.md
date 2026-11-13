@@ -42,6 +42,15 @@ Read `README.md` for setup and `docs/api.md` for the function reference before w
 - Anchor callouts with `at()` or `proj()` and place the label near the anchor so lines stay short.
 - Interfaces on a laptop or phone screen need large type: design them in a 1000 px wide space.
 
+## Motion rules that prevent wobble
+
+The overlay is fixed to the screen; the 3D scene is not. Small back-and-forth movement in 3D shows as wobble against the text.
+
+- Move the camera one way per shot and let the move end. Never add a sway or float to the camera.
+- Finish the camera move before any panel pinned to a model with `proj()` or `at()` appears, and hold it while the panel is up. `call()` labels are exempt: only their leader line follows the point.
+- Idle motion should spin, flow or travel. Do not bob or rock a model around a fixed position.
+- Check motion with a frame range, `npm run still <name> scene:6-11` (six frames). Things meant to hold still must be in the same place in every frame.
+
 ## Styles
 
 `--style toon|paper|clay|blueprint|neon` on preview, still and render. Check one still in the chosen style: the line styles only draw outlined models.
