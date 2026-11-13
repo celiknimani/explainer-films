@@ -14,5 +14,6 @@ This repo makes narrated videos in code. When asked to make or change a film, fo
 Rules:
 - Do not put claims, testimonials or figures in a sales film that the user has not supplied. Use labelled placeholders.
 - Keep reusable models in `engine/parts`, film-specific ones in the film folder.
-- Keep the picture steady (`docs/api.md`, "Keeping the picture steady"): the camera moves one way per shot and never sways, it holds still while text is pinned to a model, and idle motion spins or flows instead of bobbing.
+- Keep the picture steady (`docs/api.md`, "Keeping the picture steady"): the camera moves one way per shot and never sways, it holds still while text is pinned to a model, idle motion spins or flows instead of bobbing, and small moving objects cast no shadows.
+- Give the sound some movement: pick a voice with pitch range (or a blend), vary the pace of phrases, and pass `energy` per scene to `m.music()` so the arrangement rises and falls with the story (`docs/api.md`).
 - Match the existing code style: small pure helpers, no frameworks, no build step.

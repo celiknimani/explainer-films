@@ -115,11 +115,12 @@ class Mix:
     def ev(self, scene, t, sound, pan=0.5): self._add(self.S, sound, self.start[scene] + t, pan)       # effect at t seconds into a scene
     def transitions(self, amp=0.45):
         for n in self.order[1:]: self._add(self.S, whoosh(0.9, amp), self.start[n] - 0.45)
-    def music(self, preset='auto', level=0.8, seed=None):
+    def music(self, preset='auto', level=0.8, seed=None, energy=None, bpm=None):
         """preset: a fixed tune (bright, upbeat, calm), a generated mood (warm, tense, playful, cinematic, tech, folk),
-        'auto' to let the film's name pick a mood, or your own dict. seed: any number or text for a different tune in the same mood."""
+        'auto' to let the film's name pick a mood, or your own dict. seed: any number or text for a different tune in the same mood.
+        For generated moods: energy shapes the arrangement scene by scene (see compose); bpm overrides the mood's tempo."""
         if preset == 'auto': preset = AUTO_MOODS[_seed(self.film) % len(AUTO_MOODS)]      # tense and cinematic are only used when asked for
-        if isinstance(preset, str) and preset in MOODS: return self.compose(preset, level, self.film if seed is None else seed)
+        if isinstance(preset, str) and preset in MOODS: return self.compose(preset, level, self.film if seed is None else seed, energy, bpm)
         P = MUSIC[preset] if isinstance(preset, str) else preset; beat = 60 / P['bpm']; bar = 4 * beat; B = [np.zeros(self.n), np.zeros(self.n)]; cache = {}
         def pk(k, d):
             if (k, d) not in cache: cache[(k, d)] = pluck(midi(k), d)
@@ -141,9 +142,21 @@ class Mix:
         for d, g in [(0.031, 0.2), (0.057, 0.16), (0.101, 0.1)]: k = int(d * sr); m[k:] += g * m[:-k]          # a little room
         idx = np.arange(self.n); m *= (np.minimum(1, idx / (0.8 * sr)) * np.minimum(1, (self.n - idx) / (3.5 * sr)))[:, None]
         self.mus = m / np.abs(m).max() * level
-    def compose(self, mood, level=0.8, seed=0):
+    def _energy(self, energy):
+        # Per-scene energy, 0 to 1. 'arc' is a built-in rise and fall; a list gives one value per scene; a dict names scenes (others 0.7).
+        if energy is None: return None
+        arc = [0.35, 0.65, 0.9, 1.0, 0.5, 0.8, 1.0, 0.6, 0.9, 1.0]; n = len(self.order)
+        if energy == 'arc': e = [arc[i % len(arc)] for i in range(n)]
+        elif isinstance(energy, dict): e = [float(energy.get(s, 0.7)) for s in self.order]
+        else: e = [float(energy[min(i, len(energy) - 1)]) for i in range(n)]
+        starts = [self.start[s] for s in self.order]
+        return (lambda t: e[max(0, int(np.searchsorted(starts, t, 'right')) - 1)]), starts[1:], e
+    def compose(self, mood, level=0.8, seed=0, energy=None, bpm=None):
+        """energy=None plays one even arrangement throughout. With energy the arrangement follows the scenes: below 0.45 only pad,
+        bass and arpeggio play; from 0.45 the drums join, from 0.6 the lead, from 0.85 a second percussion layer and an upper octave.
+        Louder sections are also mixed louder, and a short drum fill leads into each scene that starts at 0.6 or more."""
         M = MOODS[mood]; r = np.random.default_rng(_seed(f'{mood}/{seed}')); sc = SCALES[M['scale']]; root = int(r.integers(45, 53))
-        bpm = int(r.integers(M['bpm'][0], M['bpm'][1] + 1)); beat = 60 / bpm; bar = 4 * beat; B = [np.zeros(self.n), np.zeros(self.n)]
+        bpm0 = int(r.integers(M['bpm'][0], M['bpm'][1] + 1)); bpm = int(bpm or bpm0); EN = self._energy(energy); beat = 60 / bpm; bar = 4 * beat; B = [np.zeros(self.n), np.zeros(self.n)]
         loops = LOOPS[M['scale']]; la = loops[int(r.integers(len(loops)))]; lb = loops[int(r.integers(len(loops)))]; prog = la + lb
         deg = lambda d, octv=0: root + 12 * octv + 12 * (d // 7) + sc[d % 7]            # scale degree to midi note
         swing = 0.16 * beat if M['drums'] == 'shuffle' else 0
@@ -171,36 +184,49 @@ class Mix:
         b = 0; t = 0.0
         while t < self.T:
             d0 = prog[b % 8]; tri = [deg(d0 + j, 1) for j in (0, 2, 4, 7)]; sec = b // 8; quiet = b < 2 or (b % 16 in (14, 15) and self.T - t > 8 * bar)
-            if M['padi'] == 'strings': self._add(B, strings([midi(k) for k in tri[:3]], bar + 1.0, 0.36), t)
-            else: self._add(B, 0.42 * pad([midi(k) for k in tri[:3]], bar + 0.8, 0.5), t)
-            for bt in ((0, 2.5) if M['drums'] != 'pulse' else (0, 0.5, 1, 1.5, 2, 2.5, 3, 3.5)): self._add(B, bass(midi(deg(d0, -1)), beat * (0.9 if M['drums'] != 'pulse' else 0.45), 0.5 if bt == 0 else 0.3), t + bt * beat)
+            e = None if EN is None else EN[0](t + bar / 2); g = 1 if e is None else 0.7 + 0.42 * e
+            if e is not None: quiet = e < 0.45
+            add = lambda x, tt, pan=0.5: self._add(B, g * x, tt, pan)
+            if M['padi'] == 'strings': add(strings([midi(k) for k in tri[:3]], bar + 1.0, 0.36), t)
+            else: add(0.42 * pad([midi(k) for k in tri[:3]], bar + 0.8, 0.5), t)
+            for bt in ((0,) if (e is not None and e < 0.45) else (0, 2.5) if M['drums'] != 'pulse' else (0, 0.5, 1, 1.5, 2, 2.5, 3, 3.5)): add(bass(midi(deg(d0, -1)), beat * (0.9 if M['drums'] != 'pulse' else 0.45), 0.5 if bt == 0 else 0.3), t + bt * beat)
             for i in range(int(round(4 / step))):
                 tt = t + i * step * beat + (swing if (step == 0.5 and i % 2) else 0)
-                self._add(B, tone(M['chord'], tri[pat[i % len(pat)]], max(0.5, step * beat * 1.8), 0.26 if i % 2 == 0 else 0.17), tt, 0.3 + 0.4 * (i % 2))
+                add(tone(M['chord'], tri[pat[i % len(pat)]], max(0.5, step * beat * 1.8), 0.26 if i % 2 == 0 else 0.17), tt, 0.3 + 0.4 * (i % 2))
+                if e is not None and e >= 0.85 and i % 2: add(tone(M['chord'], tri[pat[i % len(pat)]] + 12, max(0.4, step * beat * 1.4), 0.09), tt, 0.7 - 0.4 * (i % 4 > 1))
             if not quiet:
                 D = M['drums']
                 if D == 'four':
-                    for bt in range(4): self._add(B, kick(0.5), t + bt * beat)
-                    for bt in (1, 3): self._add(B, clap(0.32), t + bt * beat, 0.45)
-                    for i in range(8): self._add(B, hat(0.05 if i % 2 else 0.025), t + i * beat / 2, 0.7)
+                    for bt in range(4): add(kick(0.5), t + bt * beat)
+                    for bt in (1, 3): add(clap(0.32), t + bt * beat, 0.45)
+                    for i in range(8): add(hat(0.05 if i % 2 else 0.025), t + i * beat / 2, 0.7)
                 elif D == 'half':
-                    self._add(B, kick(0.5), t); self._add(B, snap(0.035), t + 2 * beat, 0.45); self._add(B, kick(0.3), t + 2.5 * beat)
-                    for i in range(4): self._add(B, shaker(0.035), t + (i + 0.5) * beat, 0.7)
+                    add(kick(0.5), t); add(snap(0.035), t + 2 * beat, 0.45); add(kick(0.3), t + 2.5 * beat)
+                    for i in range(4): add(shaker(0.035), t + (i + 0.5) * beat, 0.7)
                 elif D == 'shuffle':
-                    for bt in (0, 2): self._add(B, kick(0.5), t + bt * beat)
-                    for bt in (1, 3): self._add(B, snap(0.035), t + bt * beat, 0.45)
-                    for i in range(8): self._add(B, shaker(0.045 if i % 2 else 0.024), t + i * beat / 2 + (swing if i % 2 else 0), 0.72)
+                    for bt in (0, 2): add(kick(0.5), t + bt * beat)
+                    for bt in (1, 3): add(snap(0.035), t + bt * beat, 0.45)
+                    for i in range(8): add(shaker(0.045 if i % 2 else 0.024), t + i * beat / 2 + (swing if i % 2 else 0), 0.72)
                 elif D == 'hand':
-                    for bt, f, a in ((0, 82, 0.5), (0.75, 150, 0.28), (1.5, 150, 0.32), (2, 82, 0.42), (3, 150, 0.3), (3.5, 190, 0.22)): self._add(B, tom(f, a), t + bt * beat, 0.4 if f < 100 else 0.62)
+                    for bt, f, a in ((0, 82, 0.5), (0.75, 150, 0.28), (1.5, 150, 0.32), (2, 82, 0.42), (3, 150, 0.3), (3.5, 190, 0.22)): add(tom(f, a), t + bt * beat, 0.4 if f < 100 else 0.62)
                 elif D == 'toms':
-                    self._add(B, tom(62, 0.6), t)
-                    if b % 2: self._add(B, tom(62, 0.35), t + 2.5 * beat); self._add(B, tom(84, 0.3), t + 3 * beat, 0.6)
+                    add(tom(62, 0.6), t)
+                    if b % 2: add(tom(62, 0.35), t + 2.5 * beat); add(tom(84, 0.3), t + 3 * beat, 0.6)
                 elif D == 'pulse':
-                    for i in range(8): self._add(B, hat(0.035 if i % 2 else 0.018), t + i * beat / 2, 0.7)
-            if b >= 4 and sec % 4 != 3:
+                    for i in range(8): add(hat(0.035 if i % 2 else 0.018), t + i * beat / 2, 0.7)
+            if e is not None and e >= 0.85:
+                for bt in (0, 2): add(kick(0.34), t + bt * beat)
+                for i in range(8): add(shaker(0.034 if i % 2 else 0.018), t + i * beat / 2 + (swing if i % 2 else 0), 0.74)
+            if (b >= 4 and sec % 4 != 3) if e is None else (b >= 2 and e >= 0.6):
                 for bi, on, d in (A if sec % 2 == 0 else A2):
-                    if bi == b % 8: self._add(B, tone(M['lead'], deg(d, 1), 1.3 if M['lead'] in ('bell', 'keys') else beat * 1.1, {'flute': 0.12, 'bell': 0.11, 'keys': 0.14}[M['lead']]), t + on * beat, 0.58)
+                    if bi == b % 8: add(tone(M['lead'], deg(d, 1), 1.3 if M['lead'] in ('bell', 'keys') else beat * 1.1, {'flute': 0.12, 'bell': 0.11, 'keys': 0.14}[M['lead']]), t + on * beat, 0.58)
             t += bar; b += 1
+        if EN is not None:         # a drum fill into each scene that starts with some energy, placed on the beat nearest the cut
+            for tb0, en in zip(EN[1], EN[2][1:]):
+                if en < 0.6: continue
+                tb = round(tb0 / beat) * beat
+                for j, (off, f) in enumerate(((1.0, 96), (0.75, 112), (0.5, 132), (0.25, 158))): self._add(B, tom(f, 0.26 + 0.07 * j), tb - off * beat, 0.35 + 0.1 * j)
+                self._add(B, kick(0.6), tb); self._add(B, tone('bell', deg(0, 2), 1.6, 0.07 + 0.05 * en), tb, 0.5)
         m = np.stack(B, 1)
         for d, g in [(0.031, 0.2), (0.057, 0.16), (0.101, 0.1)]: k = int(d * sr); m[k:] += g * m[:-k]
         idx = np.arange(self.n); m *= (np.minimum(1, idx / (0.8 * sr)) * np.minimum(1, (self.n - idx) / (3.5 * sr)))[:, None]

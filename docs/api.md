@@ -98,12 +98,29 @@ Leave both out and they are picked from the film's folder name, so a new film do
 
 ## Keeping the picture steady
 
-The overlay is fixed to the screen and the 3D scene is not, so any small back-and-forth movement in 3D shows up as wobble against the text. Four rules prevent it:
+The overlay is fixed to the screen and the 3D scene is not, so any small back-and-forth movement in 3D shows up as wobble against the text. Five rules prevent it:
 
 - **The camera moves one way per shot.** Write a move as two or more `camKeys` keys and let it end. Never add a sine or other sway to the camera; the engine has no idle camera float for this reason.
 - **Hold the camera while text is pinned to a model.** A panel placed with `proj()` or `at()` is recomputed every frame, so under a moving camera it slides by fractions of a pixel and its text shimmers. End the camera move before the first pinned panel appears: the last key's time can be a cue, such as `{ t: q[2] - 0.4, ... }`. Callouts made with `call()` are fine under a moving camera, because only the leader line follows the point and the label stays put.
 - **Idle motion travels or turns one way.** Spinning rotors, flowing coins, rising steam and a turning globe read as life. A model that bobs or rocks about a fixed position on a slow loop reads as wobble.
+- **Moving things cast no shadows unless the shadow is the point.** Coins, sparks, cards and other small items that fly across a scene drag grey blobs over walls and ground, and those read as flicker. Give them `castShadow = false`. Shadows belong to things that stand still or move slowly as a whole.
 - **Check motion, not only layout.** A single still cannot show this. `npm run still my-film scene:6-11` draws six frames across a range; anything that should hold still must sit in the same place in all six.
+
+## Narration: script.json
+
+```json
+{ "voice": "af_heart:0.6+af_sarah:0.4", "lang": "en-us", "speed": 1.05,
+  "scenes": { "intro": [ { "say": "Is it safe?", "speed": 0.93 }, "About two percent of loans are late." ] } }
+```
+
+| Key | Meaning |
+|---|---|
+| `voice` | A Kokoro voice (`bm_george`, `bf_emma`, `af_heart`, ...) or a weighted blend of several, joined with `+` |
+| `lang` | `en-gb` or `en-us`; match it to the voice (`b*` voices are British, `a*` American) |
+| `speed` | Default pace. A phrase written as `{ "say", "speed" }` sets its own |
+| `lead`, `pause`, `short_pause`, `hold`, `tail` | Silence before the first phrase, after a sentence, after a comma, at the end of a scene and at the end of the film |
+
+A flat read is usually the voice, not the script. Measured on the same lines, `bf_emma` moves through about 6.6 semitones of pitch, `af_heart` about 9.4 and `af_sarah` about 12. Blending a clean voice with a livelier one keeps the first one's quality and adds movement. Vary the pace too: slow the questions and the closing line by a few percent, and speed up short lists.
 
 ## Sound: tools/synth.py
 
@@ -125,6 +142,24 @@ m.write()
 | `tense` | Minor, marimba ostinato, pulsing bass, no snare |
 | `cinematic` | Slow minor, strings, low drums, bell lead |
 
-Within a mood, the key, tempo, chord loop, arpeggio and melody are generated from a seed, by default the film's name. The same film always gets the same tune; `m.music('warm', seed=2)` gives another one. `bright`, `upbeat` and `calm` are three fixed tunes kept for films already made with them.
+Within a mood, the key, tempo, chord loop, arpeggio and melody are generated from a seed, by default the film's name. `bpm=104` overrides the tempo. The same film always gets the same tune; `m.music('warm', seed=2)` gives another one. `bright`, `upbeat` and `calm` are three fixed tunes kept for films already made with them.
+
+### Music that follows the story
+
+By default a mood plays one even arrangement from start to finish. Give it an energy per scene and the arrangement changes with the film:
+
+```python
+m.music('folk', energy=dict(title=0.35, growth=1.0, health=0.5))   # scenes not named play at 0.7
+m.music('folk', energy='arc')                                      # a built-in rise and fall
+```
+
+| Energy | What plays |
+|---|---|
+| below 0.45 | Pad, bass and arpeggio only |
+| 0.45 and up | Drums join |
+| 0.6 and up | The lead melody joins, and a short drum fill leads into the scene |
+| 0.85 and up | A second percussion layer and an upper octave |
+
+Higher energy is also mixed a few decibels louder. Use low values for questions and careful passages, high ones for growth, action and the close.
 
 Effects: `pop_`, `tick`, `thud`, `whoosh`, `riser`, `buzz`, `bell`. Place them with the same cue arithmetic the scene uses, so sound and picture stay together.

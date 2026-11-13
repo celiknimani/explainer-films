@@ -49,11 +49,17 @@ The overlay is fixed to the screen; the 3D scene is not. Small back-and-forth mo
 - Move the camera one way per shot and let the move end. Never add a sway or float to the camera.
 - Finish the camera move before any panel pinned to a model with `proj()` or `at()` appears, and hold it while the panel is up. `call()` labels are exempt: only their leader line follows the point.
 - Idle motion should spin, flow or travel. Do not bob or rock a model around a fixed position.
+- Small objects that fly through a scene (coins, sparks, cards) get `castShadow = false`. Their shadows sliding over walls and ground look like flicker.
 - Check motion with a frame range, `npm run still <name> scene:6-11` (six frames). Things meant to hold still must be in the same place in every frame.
 
 ## Styles
 
 `--style toon|paper|clay|blueprint|neon` on preview, still and render. Check one still in the chosen style: the line styles only draw outlined models.
+
+## Sound with some movement
+
+- Voice: the default read can be flat. In `script.json`, choose a voice with pitch range or blend two (`"voice": "af_heart:0.6+af_sarah:0.4"`), and set the pace of single phrases with `{ "say": "...", "speed": 0.95 }`: slower for questions and the close, quicker for short lists.
+- Music: pass an energy per scene, `m.music(mood, energy=dict(intro=0.35, growth=1.0))`, so instruments enter and drop out with the story. Low for questions and careful passages, high for growth, action and the ending.
 
 ## Honesty
 
