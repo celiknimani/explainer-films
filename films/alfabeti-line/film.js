@@ -74,13 +74,13 @@ function title(T) {
   const q = Q.title;
   cap('22 NËNTOR  ·  DITA E ALFABETIT', 152, 150, T, 0.3);
   roll('36', 132, 660, T, q[0], { size: 480, col: RED, t1: q[1] - 0.3 });
-  type('letters.', 800, 480, T, q[0] + 0.5, { size: 160, w: 800, t1: q[1] - 0.25 });
-  type('One sound for each.', 808, 606, T, q[0] + 1.7, { size: 68, w: 600, col: MUTE, t1: q[1] - 0.2 });
+  type('shkronja.', 800, 480, T, q[0] + 0.5, { size: 160, w: 800, t1: q[1] - 0.25 });
+  type('Një tingull për secilën.', 808, 606, T, q[0] + 1.7, { size: 68, w: 600, col: MUTE, t1: q[1] - 0.2 });
   LETTERS.forEach((l, i) => { const t0 = q[0] + 0.1 + i * 0.034, k = settle(prog(T, t0, 0.4)); if (k <= 0) return;      // the whole alphabet, lit one letter at a time
     const hot = Math.max(1 - prog(T, t0 + 0.12, 0.6), Math.sin(Math.PI * prog(T, q[1] + 2.9 + i * 0.03, 0.5)));
     ctx.save(); ctx.globalAlpha = clamp(k * 2); font(40, 700, 'Inter', 0); ctx.textAlign = 'center'; ctx.fillStyle = mix(FAINT, RED, hot); ctx.fillText(l, 172 + i * 45.2, 946 + 24 * (1 - k)); ctx.restore(); });
-  type('The Albanian\nalphabet', 144, 440, T, q[1] + 0.1, { size: 176, w: 800, lh: 0.97 });
-  sub('and the first book every child opens.', 152, 806, T, q[1] + 2.7, { size: 46 });
+  type('Alfabeti\nshqip', 144, 440, T, q[1] + 0.1, { size: 176, w: 800, lh: 0.97 });
+  sub('dhe libri i parë që hap çdo fëmijë.', 152, 806, T, q[1] + 2.7, { size: 46 });
   book(1570, 470, 170, T, q[1] + 3.4);
 }
 
@@ -88,22 +88,22 @@ function title(T) {
 const T1462 = when(SPX, 3600), T1555 = when(SPX, 5500);
 function early(T) {
   const q = Q.early;
-  type('Spoken', 2046, 400, T, q[0] + 0.2, { size: 176, w: 800 }); type('long before it was written.', 2056, 500, T, q[0] + 0.9, { size: 64, w: 600, col: MUTE });
-  cap('SPOKEN', 2650, 884, T, q[0] + 0.8, { align: 'c', t1: q[1] - 0.4 }); cap('WRITTEN', 3410, 884, T, q[0] + 2.0, { align: 'c', col: INK, t1: q[1] - 0.4 });
+  type('E folur', 2046, 400, T, q[0] + 0.2, { size: 176, w: 800 }); type('shumë kohë para se të shkruhej.', 2056, 500, T, q[0] + 0.9, { size: 64, w: 600, col: MUTE });
+  cap('E FOLUR', 2650, 884, T, q[0] + 0.8, { align: 'c', t1: q[1] - 0.4 }); cap('E SHKRUAR', 3410, 884, T, q[0] + 2.0, { align: 'c', col: INK, t1: q[1] - 0.4 });
   stop(3600, Y1, T, T1462, RED); roll('1462', 3584, Y1 - 100, T, T1462, { size: 220 });
-  type('Baptism formula', 3590, Y1 + 116, T, T1462 + 0.3, { size: 58, w: 800 }); sub('The oldest dated line in Albanian', 3590, Y1 + 170, T, T1462 + 0.5); sub('Pal Engjëlli · 8 November 1462', 3590, Y1 + 218, T, T1462 + 0.65);
+  type('Formula e pagëzimit', 3590, Y1 + 116, T, T1462 + 0.3, { size: 58, w: 800 }); sub('Fjalia më e vjetër e datuar', 3590, Y1 + 170, T, T1462 + 0.5); sub('Pal Engjëlli · 8 nëntor 1462', 3590, Y1 + 218, T, T1462 + 0.65);
   type('“Un’te paghesont’ pr’emenit\nt’Atit e t’Birit e t’Spertit Senit.”', 4250, Y1 - 190, T, T1462 + 0.9, { size: 54, w: 600, by: 'char', gap: 0.03, d: 0.4, lh: 1.3 });
-  sub('“I baptise you in the name of the Father,\nand the Son, and the Holy Spirit.”', 4250, Y1 + 116, T, T1462 + 3.0, { size: 34, lh: 1.36 });
+  sub('“Unë të pagëzoj në emër të Atit,\ne të Birit, e të Shpirtit të Shenjtë.”', 4250, Y1 + 116, T, T1462 + 3.0, { size: 34, lh: 1.36 });
   stop(5500, Y1, T, T1555, RED); roll('1555', 5484, Y1 - 100, T, T1555, { size: 220 });
-  type('Meshari', 5490, Y1 + 116, T, T1555 + 0.3, { size: 58, w: 800 }); sub('The first known printed book in Albanian', 5490, Y1 + 170, T, T1555 + 0.5); sub('Gjon Buzuku', 5490, Y1 + 218, T, T1555 + 0.65);
+  type('Meshari', 5490, Y1 + 116, T, T1555 + 0.3, { size: 58, w: 800 }); sub('Libri i parë i shtypur që njohim', 5490, Y1 + 170, T, T1555 + 0.5); sub('Gjon Buzuku', 5490, Y1 + 218, T, T1555 + 0.65);
   book(6560, 470, 190, T, T1555 + 0.6, { rules: 4 });
 }
 
 // ---------- one line becomes four
-const NAMES = ['Latin', 'Greek', 'Arabic', 'Invented scripts'], NOTES = ['in the north', 'in the south', 'the Ottoman script', 'Elbasan · Todhri · Vithkuqi'];
+const NAMES = ['Latine', 'Greke', 'Arabe', 'Të shpikura'], NOTES = ['në veri', 'në jug', 'shkrimi osman', 'Elbasan · Todhri · Vithkuqi'];      // shkronja latine, greke, arabe, të shpikura
 function scripts(T) {
   const q = Q.scripts;
-  type('For centuries,', 6570, 1640, T, q[0] + 0.1, { size: 64, w: 600, col: MUTE }); type('no single\nalphabet.', 6564, 1790, T, q[0] + 1.3, { size: 150, w: 800, lh: 1.02 });
+  type('Për shekuj me radhë,', 6570, 1640, T, q[0] + 0.1, { size: 64, w: 600, col: MUTE }); type('asnjë alfabet\ni vetëm.', 6564, 1784, T, q[0] + 1.3, { size: 124, w: 800, lh: 1.04 });
   stop(7900, Y2, T, when(SPX, 7890), INK, 30);
   STR.filter(s => s.base !== undefined).forEach(s => { const i = s.base, t0 = INTRO[i] + 0.25;
     type(NAMES[i], 8400, s.y - 34, T, t0, { size: 58, w: 800 }); sub(NOTES[i], 8402, s.y + 56, T, t0 + 0.25, { size: 30 });
@@ -114,17 +114,17 @@ function scripts(T) {
 }
 
 // ---------- primers, and more alphabets
-const T1844 = Q.primer[0] + 1.0, PRIMERS = [['1867–72', 'Kristoforidhi · Gheg and Tosk'], ['1879', 'The Istanbul primer'], ['1905–06', 'Gurakuqi']];
+const T1844 = Q.primer[0] + 1.0, PRIMERS = [['1867–72', 'Kristoforidhi · gegë e toskë'], ['1879', 'Abetarja e Stambollit'], ['1905–06', 'Gurakuqi']];
 function primer(T) {
   const q = Q.primer;
   stop(9900, 2260, T, T1844, AMBER); roll('1844', 9884, 2512, T, T1844, { size: 220 });
   book(10640, 2436, 112, T, T1844 + 2.3, { rules: 0 }); ['𐕰', '𐕱', '𐕲', '𐕳'].forEach((g, j) => glyph(g, 10640 + (j < 2 ? -1 : 1) * (j % 2 ? 76 : 34), 2428, T, T1844 + 2.9 + j * 0.1, { size: 36, fam: 'Vithkuqi', w: 400, col: AMBER }));
-  type('Ëvetar', 10830, 2416, T, T1844 + 2.6, { size: 64, w: 800, t1: q[1] - 0.4 }); sub('The first Albanian primer', 10832, 2470, T, T1844 + 2.8, { t1: q[1] - 0.4 }); sub('by Naum Veqilharxhi, in his own script', 10832, 2518, T, T1844 + 3.0, { t1: q[1] - 0.4 });
+  type('Ëvetar', 10830, 2416, T, T1844 + 2.6, { size: 64, w: 800, t1: q[1] - 0.4 }); sub('Abetarja e parë shqipe', 10832, 2470, T, T1844 + 2.8, { t1: q[1] - 0.4 }); sub('nga Naum Veqilharxhi, me shkrimin e tij', 10832, 2518, T, T1844 + 3.0, { t1: q[1] - 0.4 });
   PRIMERS.forEach(([yr, who], j) => { const x = 11720 + j * 600, t0 = q[1] + 1.4 + j * 0.5;
     rule(x, 1492, x, 2308, ez(T, t0, 0.7), FAINT, 3); book(x, 1396, 56, T, t0 + 0.1, { rules: 0, lw: 5 });
     type(yr, x + 80, 1392, T, t0 + 0.2, { size: 54, w: 800 }); sub(who, x + 81, 1436, T, t0 + 0.35, { size: 30 }); });
-  type('More primers followed', 11700, 2436, T, q[1] + 0.7, { size: 96, w: 800, t1: q[2] - 0.5 }); sub('in different alphabets, and in both dialects', 11705, 2494, T, q[1] + 1.2, { size: 40, t1: q[2] - 0.5 });
-  type('At least six alphabets', 13420, 1440, T, q[2] + 1.9, { size: 120, w: 800 }); sub('in use by the start of the twentieth century', 13426, 1498, T, q[2] + 2.3);
+  type('Pasuan abetare të tjera', 11700, 2436, T, q[1] + 0.7, { size: 96, w: 800, t1: q[2] - 0.5 }); sub('me alfabete të ndryshme dhe në të dy dialektet', 11705, 2494, T, q[1] + 1.2, { size: 40, t1: q[2] - 0.5 });
+  type('Të paktën gjashtë alfabete', 13420, 1440, T, q[2] + 1.9, { size: 104, w: 800 }); sub('në përdorim në fillim të shekullit XX', 13426, 1498, T, q[2] + 2.3);
   STR.forEach((s, i) => { const k = pop(T, q[2] + 2.6 + i * 0.13); if (k <= 0) return;                             // count them
     disc(14250, s.y, 30 * k, s.col); disc(14250, s.y, 22 * k, PAPER); ctx.save(); ctx.globalAlpha = clamp(k * 2); font(28, 800, 'InterNum', 0); ctx.textAlign = 'center'; ctx.fillStyle = INK; ctx.fillText(i + 1, 14250, s.y + 10); ctx.restore(); });
 }
@@ -135,18 +135,18 @@ const seat = i => { const a = (-90 + (i + 0.5) * 7.2) * Math.PI / 180; return [H
 const huddle = j => j === 0 ? [HUB[0], HUB[1] - 40] : [HUB[0] + 74 * Math.cos(j * Math.PI / 5), HUB[1] - 40 + 74 * Math.sin(j * Math.PI / 5)];
 function congress(T) {
   const q = Q.congress, tH = q[0] + 0.7, tSeat = q[0] + 2.7, tVote = q[0] + 5.0, tCom = q[2] + 0.6;
-  roll('1908', 15414, 1650, T, tH, { size: 220 }); type('Manastir', 15420, 1740, T, q[0] + 4.3, { size: 62, w: 800 }); sub('today Bitola · 14–22 November', 15420 + width('Manastir', 62, 800) + 26, 1740, T, q[0] + 5.2, { size: 34 });
-  roll('50', 15418, 2112, T, tSeat, { size: 120 }); sub('delegates', 15424, 2162, T, tSeat + 0.2, { size: 32 });
-  roll('32', 15758, 2112, T, tVote, { size: 120 }); sub('with a vote', 15764, 2162, T, tVote + 0.2, { size: 32 });
-  roll('11', 16078, 2112, T, tCom, { size: 120, col: RED }); sub('on the alphabet\ncommission', 16084, 2162, T, tCom + 0.2, { size: 32, lh: 1.25 });
+  roll('1908', 15414, 1650, T, tH, { size: 220 }); type('Manastir', 15420, 1740, T, q[0] + 4.3, { size: 62, w: 800 }); sub('sot Bitola · 14–22 nëntor', 15420 + width('Manastir', 62, 800) + 26, 1740, T, q[0] + 5.2, { size: 34 });
+  roll('50', 15418, 2112, T, tSeat, { size: 120 }); sub('delegatë', 15424, 2162, T, tSeat + 0.2, { size: 32 });
+  roll('32', 15758, 2112, T, tVote, { size: 120 }); sub('me votë', 15764, 2162, T, tVote + 0.2, { size: 32 });
+  roll('11', 16078, 2112, T, tCom, { size: 120, col: RED }); sub('në komisionin\ne alfabetit', 16084, 2162, T, tCom + 0.2, { size: 32, lh: 1.25 });
   for (let i = 0; i < 50; i++) { const k = pop(T, tSeat + i * 0.03, 0.4); if (k <= 0) continue; const [x, y] = seat(i), j = COMM.indexOf(i);
     if (NOVOTE(i)) { disc(x, y, 12 * k, INK); disc(x, y, 7.5 * k * ez(T, tVote + i * 0.01, 0.4), PAPER); }                // observers become rings
     else if (j < 0) disc(x, y, 12 * k, INK);
     else { const m = io3(prog(T, tCom + 0.3 + j * 0.05, 0.9)), [hx, hy] = huddle(j); disc(lerp(x, hx, m), lerp(y, hy, m), 12 * k + 4 * m, mix(INK, RED, prog(T, tCom + j * 0.04, 0.3))); } }
-  sub('One question', HUB[0], 1826, T, q[1] + 0.2, { align: 'c', w: 600, t1: q[2] - 0.25 }); type('Which\nletters?', HUB[0], 1908, T, q[1] + 1.9, { size: 96, w: 800, align: 'c', lh: 1.0, t1: q[2] - 0.2 });
-  type('Commission of 11', HUB[0], 2046, T, tCom + 1.1, { size: 34, w: 700, col: RED, align: 'c' });
-  type('Latin', 17660, 1826, T, q[2] + 3.4, { size: 58, w: 800, col: RED }); type('Istanbul', 17660, 2012, T, q[2] + 4.8, { size: 58, w: 800, col: mix(INK, GREY, prog(T, q[3] + 1.5, 0.8)) });
-  type('Within a few years,', 17020, 1578, T, q[3] + 0.1, { size: 48, w: 600, col: MUTE }); type('one alphabet.', 17014, 1704, T, q[3] + 2.0, { size: 130, w: 800 });
+  sub('Një pyetje', HUB[0], 1826, T, q[1] + 0.2, { align: 'c', w: 600, t1: q[2] - 0.25 }); type('Cilat\nshkronja?', HUB[0], 1908, T, q[1] + 1.9, { size: 96, w: 800, align: 'c', lh: 1.0, t1: q[2] - 0.2 });
+  type('Komisioni i 11-ve', HUB[0], 2046, T, tCom + 1.1, { size: 34, w: 700, col: RED, align: 'c' });
+  type('Latin', 17660, 1826, T, q[2] + 3.4, { size: 58, w: 800, col: RED }); type('Stambolli', 17660, 2012, T, q[2] + 4.8, { size: 58, w: 800, col: mix(INK, GREY, prog(T, q[3] + 1.5, 0.8)) });
+  type('Brenda pak vitesh,', 17020, 1578, T, q[3] + 0.1, { size: 48, w: 600, col: MUTE }); type('një alfabet.', 17014, 1704, T, q[3] + 2.0, { size: 130, w: 800 });
 }
 
 // ---------- thirty-six letters, on red. Drawn in screen pixels over everything else.
@@ -163,8 +163,8 @@ function letters(T, c) {
     if (l.length === 2) { const p = pop(T, tP + np++ * 0.06); if (p > 0) box(cx - 60 * p, cy - 60 * p, 120 * p, 120 * p, 26, WHITE, { line: 5, a: A * clamp(p * 2) }); }
     if (MARKED.has(l)) { const m = pop(T, tM + (l === 'ë' ? 0.25 : 0)), u = prog(T, tM + (l === 'ë' ? 0.25 : 0), 0.9); ring(cx, cy, 76 * m, 6, WHITE, 1, A); if (u > 0 && u < 1) ring(cx, cy, 76 + 70 * settle(u), 4, WHITE, 1, A * (1 - u)); }
     ctx.save(); ctx.translate(cx, cy); ctx.scale(k * (1 + 0.2 * bump), k * (1 + 0.2 * bump)); ctx.globalAlpha = A * clamp(k * 2); font(84, 700, 'Inter', -0.02); ctx.textAlign = 'center'; ctx.fillStyle = v > 0.5 ? RED : WHITE; ctx.fillText(l, -1, 27); ctx.restore(); });
-  roll('36', 1404, 520, T, q[0] - 0.3, { size: 300, col: WHITE, a: A }); type('letters', 1414, 612, T, q[0], { size: 76, w: 700, col: WHITE, a: A }); sub('one sound for each', 1416, 668, T, q[0] + 0.3, { col: WH(0.78), a: A });
-  [[170, '7', 'vowels', tV], [480, '29', 'consonants', tC], [940, '9', 'written as pairs', tP], [1430, '2', 'carry a mark', tM]].forEach(([x, n, s, t0]) => {
+  roll('36', 1404, 520, T, q[0] - 0.3, { size: 300, col: WHITE, a: A }); type('shkronja', 1414, 612, T, q[0], { size: 76, w: 700, col: WHITE, a: A }); sub('një tingull për secilën', 1416, 668, T, q[0] + 0.3, { col: WH(0.78), a: A });
+  [[170, '7', 'zanore', tV], [450, '29', 'bashkëtingëllore', tC], [1010, '9', 'me dy shkronja', tP], [1470, '2', 'me shenjë', tM]].forEach(([x, n, s, t0]) => {
     roll(n, x, 968, T, t0, { size: 120, col: WHITE, a: A, d: 0.7 }); type(s, x + width(n, 120, 800, 'InterNum', -0.03) + 20, 968, T, t0 + 0.15, { size: 40, w: 600, col: WH(0.82), a: A }); });
 }
 
@@ -174,17 +174,17 @@ const T2012 = when(RPX, 21150), T2022 = when(RPX, 22150), TILES = [['Elbasan', '
 function today(T) {
   const q = Q.today, tJ = q[0] - 0.5, tS = q[0] + 5.3;
   stop(19350, Y2, T, 0, RED); roll('1972', 19334, 1800, T, tJ, { size: 220 });
-  type('Orthography Congress', 19340, 2016, T, q[0] + 2.4, { size: 58, w: 800 }); sub('Tirana · 20–25 November 1972', 19340, 2070, T, q[0] + 2.7);
+  type('Kongresi i Drejtshkrimit', 19340, 2016, T, q[0] + 2.4, { size: 52, w: 800 }); sub('Tiranë · 20–25 nëntor 1972', 19340, 2070, T, q[0] + 2.7);
   font(120, 800, 'Inter', -0.02); let x = 20090; WORD.forEach((ch, i) => { const wch = ctx.measureText(ch).width, k = settle(prog(T, q[0] + 3.6 + i * 0.04, 0.4)), m = 1 - clamp(over(prog(T, tS + i * 0.035, 0.6)), 0, 1.1);      // letters out of line, then in line
     if (k > 0) { ctx.save(); ctx.translate(x + wch / 2, 1790 + JIT[i][0] * 44 * m); ctx.rotate(JIT[i][1] * 0.32 * m); ctx.globalAlpha = clamp(k * 2); font(120, 800, 'Inter', -0.02); ctx.textAlign = 'center'; ctx.fillStyle = mix(INK, MUTE, m); ctx.fillText(ch, 0, 0); ctx.restore(); }
     x += wch; });
-  type('One standard spelling', 20094, 2016, T, tS + 0.5, { size: 46, w: 700, col: RED }); sub('drejtshkrimi: orthography', 20094, 2066, T, tS + 0.8, { size: 30 });
+  type('Një drejtshkrim i njësuar', 20094, 2016, T, tS + 0.5, { size: 46, w: 700, col: RED });
   stop(21150, Y2, T, T2012, RED); roll('2012', 21136, 1800, T, T2012, { size: 170 });
-  type('A shared Abetare', 21140, 2012, T, T2012 + 2.5, { size: 54, w: 800 }); sub('Albania and Kosovo', 21140, 2064, T, T2012 + 2.8);
+  type('Abetare e përbashkët', 21140, 2012, T, T2012 + 2.5, { size: 54, w: 800 }); sub('Shqipëria dhe Kosova', 21140, 2064, T, T2012 + 2.8);
   { const k = pop(T, T2012 + 0.8), dx = lerp(150, 52, io3(prog(T, T2012 + 2.4, 1.0))), cx = 21830, cy = 1716, r = 86 * k;                       // two circles that come to share a middle
     if (k > 0) { ctx.save(); ctx.beginPath(); ctx.arc(cx - dx, cy, r, 0, 7); ctx.clip(); disc(cx + dx, cy, r, RED); ctx.restore(); ring(cx - dx, cy, r, 6, INK); ring(cx + dx, cy, r, 6, INK); } }
-  stop(22150, Y2, T, T2022, RED); roll('2022', 22136, 1800, T, T2022, { size: 170 }); type('A new joint edition', 22140, 2012, T, T2022 + 0.9, { size: 54, w: 800 });
-  sub('The old invented scripts', 22962, 1560, T, q[2] + 0.9, { size: 48, w: 600 }); type('now in Unicode', 22956, 1694, T, q[2] + 2.6, { size: 130, w: 800 }); sub('the standard behind every screen', 23990, 1694, T, q[2] + 4.7);
+  stop(22150, Y2, T, T2022, RED); roll('2022', 22136, 1800, T, T2022, { size: 170 }); type('Botim i ri\ni përbashkët', 22140, 2012, T, T2022 + 0.9, { size: 54, w: 800, lh: 1.14 });
+  sub('Shkrimet e vjetra të shpikura', 22962, 1560, T, q[2] + 0.9, { size: 48, w: 600 }); type('tani në Unicode', 22956, 1694, T, q[2] + 2.6, { size: 118, w: 800 }); sub('standardi pas çdo ekrani', 23990, 1694, T, q[2] + 4.7);
   TILES.forEach(([name, ver, yr, g, tx]) => { const t0 = when(RPX, tx), k = pop(T, t0 + 0.25, 0.5);
     rule(tx, Y2 + 16, tx, 1996, ez(T, t0 + 0.1, 0.3), INK, 4); if (k > 0) box(tx - 95 * k, 1996, 190 * k, 190 * k, 36, INK, { a: clamp(k * 3) });
     glyph(g, tx, 2076, T, t0 + 0.45, { size: 150, fam: name, w: 400, col: PAPER }); stop(tx, Y2, T, t0, AMBER, 20);
@@ -195,14 +195,14 @@ function today(T) {
 const T2026 = when(RPX, 25050), SLOT = LETTERS.map((_, i) => [BK.x + (i % 12 - 5.5) * 84, 1486 + Math.floor(i / 12) * 84]);      // three tidy rows above the book
 function outro(T) {
   const q = Q.outro;
-  stop(25050, Y2, T, T2026, RED); roll('2026', 25036, 1800, T, T2026, { size: 170 }); sub('22 November · Alphabet Day', 25040, 2012, T, T2026 + 0.4, { size: 40, w: 600 });
-  roll('118', 25634, 1812, T, q[0] + 1.7, { size: 330, col: RED, d: 1.3, t1: q[1] - 0.3 }); type('years', 26310, 1812, T, q[0] + 2.8, { size: 100, w: 800, t1: q[1] - 0.35 });
-  type('since the Congress of Manastir', 25646, 2012, T, q[0] + 3.5, { size: 48, w: 700, t1: q[1] - 0.3 });
+  stop(25050, Y2, T, T2026, RED); roll('2026', 25036, 1800, T, T2026, { size: 170 }); sub('22 nëntor · Dita e Alfabetit', 25040, 2012, T, T2026 + 0.4, { size: 40, w: 600 });
+  roll('118', 25634, 1812, T, q[0] + 1.7, { size: 330, col: RED, d: 1.3, t1: q[1] - 0.3 }); type('vjet', 26310, 1812, T, q[0] + 2.8, { size: 100, w: 800, t1: q[1] - 0.35 });
+  type('nga Kongresi i Manastirit', 25646, 2012, T, q[0] + 3.5, { size: 48, w: 700, t1: q[1] - 0.3 });
   rule(BK.x, BK.top + 50, BK.x, BK.bot + 50, ez(T, BOOK1 - 0.1, 0.5), RED, 12);                                    // the spine, once the line has closed the outline
   for (const d of [-1, 1]) for (let j = 0; j < 4; j++) { const r = ez(T, BOOK1 + 0.2 + j * 0.1 + (d > 0 ? 0.35 : 0), 0.5), xa = BK.x + d * 70, yy = 1870 + j * 50; rule(xa, yy - 10, xa + d * 220, yy - 40, r, FAINT, 7); }
   LETTERS.forEach((l, i) => { const k = settle(prog(T, q[1] + 4.2 + i * 0.045, 0.8)); if (k <= 0) return; const [sx, sy] = SLOT[i];       // the letters rise out of it
     ctx.save(); ctx.translate(lerp(BK.x, sx, k), lerp(BK.top + 30, sy, k) - 60 * Math.sin(Math.PI * k)); ctx.scale(0.3 + 0.7 * k, 0.3 + 0.7 * k); ctx.globalAlpha = clamp(k * 3); font(46, 700, 'Inter', 0); ctx.textAlign = 'center'; ctx.fillStyle = VOWELS.has(l) ? RED : INK; ctx.fillText(l, 0, 15); ctx.restore(); });
-  type('Abetare', BK.x, 2282, T, q[1] + 3.2, { size: 112, w: 800, align: 'c' }); sub('the same 36 letters, every autumn', BK.x, 2340, T, q[1] + 5.2, { align: 'c', size: 38 });
+  type('Abetarja', BK.x, 2282, T, q[1] + 3.2, { size: 112, w: 800, align: 'c' }); sub('të njëjtat 36 shkronja, çdo vjeshtë', BK.x, 2340, T, q[1] + 5.2, { align: 'c', size: 38 });
 }
 
 function draw(T) {

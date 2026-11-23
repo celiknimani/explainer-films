@@ -1,6 +1,6 @@
 # Sources: the Albanian alphabet as one line
 
-Checked on 23 November 2026. Flat style (`engine/flat.js`). Narration is in Albanian (`script.json`), spoken by ElevenLabs v4 through Higgsfield, preset voice Elena, one clip per scene in `voice/`. ElevenLabs does not list Albanian as a supported language, so the clips were checked by speech recognition: the transcript matches the script, and every number was confirmed with digits disabled in the recogniser. The earlier English script is kept as `script.en.json`. On-screen text is in English.
+Checked on 23 November 2026. Flat style (`engine/flat.js`). Narration is in Albanian (`script.json`), spoken by ElevenLabs v4 through Higgsfield, preset voice Elena, one clip per scene in `voice/`. ElevenLabs does not list Albanian as a supported language, so the clips were checked by speech recognition: the transcript matches the script, and every number was confirmed with digits disabled in the recogniser. The earlier English script is kept as `script.en.json`. On-screen text is in Albanian.
 
 ## Documents
 
@@ -54,7 +54,7 @@ Checked on 23 November 2026. Flat style (`engine/flat.js`). Narration is in Alba
 | Scene | Fact | Source |
 |---|---|---|
 | early | Wording of the baptism formula, "Un'te paghesont' pr'emenit t'Atit e t'Birit e t'Spertit Senit.", dated 8 November 1462 | Wikipedia, "Formula e pagëzimit". https://en.wikipedia.org/wiki/Formula_e_pag%C3%ABzimit |
-| early | English rendering "I baptise you in the name of the Father, and the Son, and the Holy Spirit" | Our translation of the standard formula; the page gives none |
+| early | Modern Albanian rendering under the formula, "Unë të pagëzoj në emër të Atit, e të Birit, e të Shpirtit të Shenjtë" | Our rendering of the standard formula; the page gives none |
 | congress | 14–22 November; 32 of 50 delegates with a vote, so 18 without (computed: 50 − 32) | CoM |
 | today | Orthography Congress dates, 20–25 November 1972 | OC |
 | outro | 118 years (computed: 2026 − 1908) | CoM, ATSH |
