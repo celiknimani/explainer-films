@@ -1,44 +1,44 @@
 {
- "voice": "af_heart:0.6+af_sarah:0.4", "lang": "en-us", "speed": 1.04, "hold": 1.1, "tail": 2.6,
+ "voice": "external: ElevenLabs v4, preset voice Elena, one clip per scene in voice/ (see tools/voice.py)", "lang": "sq", "hold": 1.1, "tail": 2.6,
  "scenes": {
   "title": [
-   { "say": "Thirty-six letters. One sound for each.", "speed": 0.96 },
-   "This is the story of the Albanian alphabet, and of the first book every child opens."
+   "Tridhjetë e gjashtë shkronja. Një tingull për secilën.",
+   "Kjo është historia e alfabetit të gjuhës shqipe, dhe e librit të parë që hap çdo fëmijë."
   ],
   "early": [
-   "Albanian was spoken long before it was written down.",
-   "The oldest dated line we have is a baptism formula from fourteen sixty-two.",
-   "The first known printed book followed in fifteen fifty-five."
+   "Shqipja u fol shumë kohë para se të shkruhej.",
+   "Fjalia më e vjetër e datuar që kemi është një formulë pagëzimi, e vitit njëmijë e katërqind e gjashtëdhjetë e dy.",
+   "Libri i parë i shtypur që njohim erdhi në vitin njëmijë e pesëqind e pesëdhjetë e pesë."
   ],
   "scripts": [
-   { "say": "But for centuries, there was no single alphabet.", "speed": 0.98 },
-   "In the north, people wrote with Latin letters. In the south, with Greek ones. Others used Arabic script.",
-   "And some invented alphabets of their own."
+   "Por për shekuj me radhë, nuk pati një alfabet të vetëm.",
+   "Në veri shkruhej me shkronja latine. Në jug, me shkronja greke. Të tjerë përdornin shkrimin arab.",
+   "Dhe disa shpikën alfabete të vetat."
   ],
   "primer": [
-   "In eighteen forty-four, one of those inventors printed the first Albanian primer, the ahbeh tahreh.",
-   "More primers followed, in different alphabets and in both dialects.",
-   "By the start of the twentieth century, at least six alphabets were in use."
+   "Në vitin njëmijë e tetëqind e dyzet e katër, njëri nga këta shpikës shtypi abetaren e parë shqipe.",
+   "Pasuan abetare të tjera, me alfabete të ndryshme dhe në të dy dialektet.",
+   "Në fillim të shekullit të njëzetë, përdoreshin të paktën gjashtë alfabete."
   ],
   "congress": [
-   "In November nineteen oh eight, fifty delegates met in Mahnasteer, today's Beetola.",
-   { "say": "They had one question to settle. Which letters?", "speed": 0.97 },
-   "A commission of eleven chose a Latin alphabet, alongside the older Istanbul one.",
-   "Within a few years, only the Latin one was still in use."
+   "Në nëntor të vitit njëmijë e nëntëqind e tetë, pesëdhjetë delegatë u mblodhën në Manastir, Bitola e sotme.",
+   "Kishin një pyetje për të zgjidhur. Cilat shkronja?",
+   "Një komision prej njëmbëdhjetë vetash zgjodhi një alfabet latin, krahas alfabetit më të vjetër të Stambollit.",
+   "Brenda pak vitesh, mbeti në përdorim vetëm alfabeti latin."
   ],
   "letters": [
-   "It has thirty-six letters: seven vowels and twenty-nine consonants.",
-   "Nine of them are written as pairs.",
-   "Two carry a mark."
+   "Ka tridhjetë e gjashtë shkronja: shtatë zanore dhe njëzet e nëntë bashkëtingëllore.",
+   "Nëntë prej tyre shkruhen me dy shkronja.",
+   "Dy kanë nga një shenjë."
   ],
   "today": [
-   "In nineteen seventy-two, a congress in Teerahna agreed on one standard spelling.",
-   "In twenty twelve, Albania and Kosovo presented a shared ahbeh tahreh, and a new joint edition followed in twenty twenty-two.",
-   "Even the old invented scripts now have a place in Unicode, the standard behind every screen."
+   "Në vitin njëmijë e nëntëqind e shtatëdhjetë e dy, një kongres në Tiranë vendosi për një drejtshkrim të njësuar.",
+   "Në vitin dy mijë e dymbëdhjetë, Shqipëria dhe Kosova paraqitën një abetare të përbashkët, dhe në vitin dy mijë e njëzet e dy pasoi një botim i ri i përbashkët.",
+   "Sot, edhe shkrimet e vjetra të shpikura kanë vendin e tyre në Junikod, standardi që qëndron pas çdo ekrani."
   ],
   "outro": [
-   "This weekend, Albanians marked one hundred and eighteen years since that decision.",
-   { "say": "And every autumn, new first-graders open the ahbeh tahreh, and meet the same thirty-six letters.", "speed": 0.98 }
+   "Këto ditë, shqiptarët shënuan njëqind e tetëmbëdhjetë vjet nga ai vendim.",
+   "Dhe çdo vjeshtë, nxënësit e klasës së parë hapin abetaren, dhe takohen me të njëjtat tridhjetë e gjashtë shkronja."
   ]
  }
 }

@@ -4,7 +4,7 @@ This repo makes narrated videos in code. When asked to make or change a film, fo
 
 1. **Facts first.** For anything factual, research current sources before writing a word of script. Keep a `SOURCES.md` in the film folder. Mark figures you computed yourself.
 2. **Script.** `npm run new <name> [explainer|engineering|sales]`, then write `films/<name>/script.json`. One list of short phrases per scene. Spell numbers as words and check unusual names for pronunciation.
-3. **Cues.** `npm run narrate <name>`. Read the printed scene lengths. Aim for 2.5 words per second when estimating.
+3. **Cues.** `npm run narrate <name>`. Read the printed scene lengths. Aim for 2.5 words per second when estimating. For a voice recorded or generated elsewhere, or a language the built-in voice lacks, put one clip per scene in `voice/` and run `python3 tools/voice.py <name>` instead (`docs/api.md`, "A voice from elsewhere").
 4. **Scenes.** Write `film.js`. Every animation start time is a cue plus an offset (`q[1] + 0.3`), never an absolute number. Scene functions are pure functions of `t`.
 5. **Stills before renders.** `npm run still <name> scene:seconds ...` at the busiest moments of every scene. Read the image. Fix overlaps, clipped text, things hidden behind other things. Repeat until clean. A full render is slow; never use it to find layout bugs. Then check motion with a range, `scene:6-11`, which draws six frames: anything meant to hold still must not shift between them.
 6. **Feel.** Choose a motion, transition, music mood and sound kit that fit the subject and differ from the last film (`docs/api.md` lists them). Unset, they are derived from the film's name.

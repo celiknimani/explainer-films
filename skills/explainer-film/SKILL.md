@@ -20,7 +20,7 @@ Read `README.md` for setup and `docs/api.md` for the function reference before w
    - Write numbers as words ("one thousand six hundred and twenty-four"). Say rounded numbers and show exact ones on screen.
    - A full pause follows only a phrase that ends a sentence (. ? !); commas and colons run on.
    - Respell names the voice may get wrong and check with the phonemizer before generating.
-4. **Generate cues:** `npm run narrate <name>`. Note each scene's length.
+4. **Generate cues:** `npm run narrate <name>`. Note each scene's length. If the narration comes from elsewhere (a recording, another speech service, a language the built-in voice lacks), put one clip per scene in `films/<name>/voice/` and run `python3 tools/voice.py <name>`; then set offsets inside phrases from `words.json`.
 5. **Storyboard in a comment or note:** for each scene, the set, the camera path, and what appears at which cue.
 6. **Build sets, then scenes** in `film.js`.
    - Reuse `engine/parts` first. Put new general-purpose models there and film-specific ones in the film folder.

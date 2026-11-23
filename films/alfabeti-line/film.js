@@ -23,25 +23,25 @@ const RP = path([[17060, 1860], ...ess(18000, 1860, 18300, Y2), ...ess(26800, Y2
 const IP = path([[17060, 1940], [18100, 1940]]);
 // Where each line's head is, as a board x that slides between holds. Every time is a narration cue plus an offset.
 const SPX = [[0, 0, 150], [Q.title[1] + 1.6, 1.1, 1300], [Q.early[0] + 0.6, 2.1, 3450], [Q.early[1] + 0.9, 1.4, 3600], [Q.early[1] + 4.2, 2.6, 5000], [Q.early[2] + 0.7, 1.3, 5500], [Q.early[2] + 2.6, 1.5, 6900], [Q.scripts[0] + 0.8, 1.9, 7900]];
-const INTRO = [Q.scripts[1] + 0.2, Q.scripts[1] + 2.9, Q.scripts[1] + 4.6, Q.scripts[2] + 0.2];                   // when each script is named
+const INTRO = [Q.scripts[1] + 0.2, Q.scripts[1] + 2.5, Q.scripts[1] + 4.8, Q.scripts[2] + 0.2];                   // when each script is named
 const STX = s => s.base !== undefined
   ? [[0, 0, 7900], [Q.scripts[0] + 2.1 + s.base * 0.08, 1.1, 8380], [INTRO[s.base] + 1.3, 1.3, 9850], [Q.primer[0] + 0.8, 1.8, 11660], [Q.primer[1] + 0.9, 1.7, 13500], [Q.primer[2] + 1.0, 1.6, 15100], [Q.congress[0] + 0.7, 1.6, INTO]]
   : [[0, 0, 12900], [Q.primer[2] + 1.3, 1.3, 15100], [Q.congress[0] + 0.7, 1.6, INTO]];
 STR.forEach(s => { s.keys = STX(s); });
-const RPX = [[0, 0, 17060], [Q.congress[2] + 3.8, 1.6, 18000], [Q.congress[3] + 2.4, 1.5, 18700], [Q.letters[0] + 2, 1, 19350], [Q.today[0] + 1.3, 1.7, 20960], [Q.today[1] + 0.7, 1.3, 21150], [Q.today[1] + 5.0, 1.4, 22150],
-  [Q.today[2] + 0.7, 1.4, 22900], [Q.today[2] + 1.5, 0.6, 23100], [Q.today[2] + 2.2, 0.6, 23650], [Q.today[2] + 2.9, 0.6, 24200], [Q.today[2] + 3.5, 0.5, 24500], [Q.outro[0] + 0.6, 1.5, 25050], [Q.outro[0] + 2.4, 1.5, 26500]];
+const RPX = [[0, 0, 17060], [Q.congress[2] + 3.8, 1.6, 18000], [Q.congress[3] + 2.4, 1.5, 18700], [Q.letters[0] + 2, 1, 19350], [Q.today[0] + 1.3, 1.7, 20960], [Q.today[1] + 1.1, 1.3, 21150], [Q.today[1] + 6.0, 1.4, 22150],
+  [Q.today[2] + 1.2, 1.5, 22900], [Q.today[2] + 2.7, 0.6, 23100], [Q.today[2] + 3.4, 0.6, 23650], [Q.today[2] + 4.1, 0.6, 24200], [Q.today[2] + 4.7, 0.5, 24500], [Q.outro[0] + 0.6, 1.5, 25050], [Q.outro[0] + 2.4, 1.5, 26500]];
 const IPX = [[0, 0, 17060], [Q.congress[2] + 3.8, 1.6, 18000], [Q.congress[3] + 1.4, 0.8, 18100]];
-const BOOK0 = Q.outro[1] + 0.2, BOOK1 = Q.outro[1] + 2.8, S26500 = along(RP, 26500);
+const BOOK0 = Q.outro[1] + 1.0, BOOK1 = Q.outro[1] + 3.4, S26500 = along(RP, 26500);
 
 // ---------- the camera: one stop per idea
 const CAMK = [{ t: 0, d: 0, x: 960, y: 540, z: 1 },
   { t: Q.early[0] + 0.3, d: 1.8, ...fit(2040, 250, 3500, 905) }, { t: Q.early[1] + 1.1, d: 1.6, ...fit(3580, 420, 5010, 930) }, { t: Q.early[2] + 0.9, d: 1.6, ...fit(5480, 360, 6770, 930) },
   { t: Q.scripts[0] + 0.9, d: 2.0, ...fit(6560, 1500, 8390, 2290, 40) }, { t: Q.scripts[1] + 0.9, d: 1.6, ...fit(7880, 1440, 9510, 2330, 70) },
-  { t: Q.primer[0] + 0.9, d: 1.8, ...fit(9880, 1990, 11500, 2550) }, { t: Q.primer[1] + 0.8, d: 1.7, ...fit(11640, 1290, 13340, 2530, 50) }, { t: Q.primer[2] + 0.8, d: 1.6, ...fit(12880, 1330, 15000, 2300, 60) },
+  { t: Q.primer[0] + 0.9, d: 1.8, ...fit(9880, 1990, 11500, 2550) }, { t: Q.primer[1] + 1.1, d: 1.6, ...fit(11640, 1290, 13340, 2530, 50) }, { t: Q.primer[2] + 1.0, d: 1.6, ...fit(12880, 1330, 15000, 2300, 60) },
   { t: Q.congress[0] + 0.9, d: 2.0, ...fit(15410, 1470, 17000, 2210) }, { t: Q.congress[2] + 3.9, d: 1.7, ...fit(17010, 1530, 18720, 2040, 90) },
   { t: Q.letters[0] + 3, d: 1, ...fit(19330, 1620, 20840, 2090), lift: 0 },                                       // made behind the red, so it is never seen
-  { t: Q.today[1] + 0.8, d: 1.6, ...fit(21130, 1600, 22700, 2080) }, { t: Q.today[2] + 0.8, d: 1.6, ...fit(22950, 1510, 24590, 2305) },
-  { t: Q.outro[0] + 0.7, d: 1.7, ...fit(25030, 1550, 26600, 2030) }, { t: Q.outro[1] + 1.0, d: 1.7, x: 27500, y: 1890, z: 1 }, { t: end - 0.2, d: 5.0, x: 27500, y: 1900, z: 0.93, lift: 0 }];
+  { t: Q.today[1] + 1.2, d: 1.6, ...fit(21130, 1600, 22700, 2080) }, { t: Q.today[2] + 1.1, d: 1.5, ...fit(22950, 1510, 24590, 2305) },
+  { t: Q.outro[0] + 0.7, d: 1.7, ...fit(25030, 1550, 26600, 2030) }, { t: Q.outro[1] + 1.3, d: 1.7, x: 27500, y: 1890, z: 1 }, { t: end - 0.2, d: 5.0, x: 27500, y: 1900, z: 0.93, lift: 0 }];
 const cam = T => camAt(T, CAMK);
 
 // ---------- small pieces
@@ -81,7 +81,7 @@ function title(T) {
     ctx.save(); ctx.globalAlpha = clamp(k * 2); font(40, 700, 'Inter', 0); ctx.textAlign = 'center'; ctx.fillStyle = mix(FAINT, RED, hot); ctx.fillText(l, 172 + i * 45.2, 946 + 24 * (1 - k)); ctx.restore(); });
   type('The Albanian\nalphabet', 144, 440, T, q[1] + 0.1, { size: 176, w: 800, lh: 0.97 });
   sub('and the first book every child opens.', 152, 806, T, q[1] + 2.7, { size: 46 });
-  book(1570, 470, 170, T, q[1] + 3.0);
+  book(1570, 470, 170, T, q[1] + 3.4);
 }
 
 // ---------- spoken, then written
@@ -103,7 +103,7 @@ function early(T) {
 const NAMES = ['Latin', 'Greek', 'Arabic', 'Invented scripts'], NOTES = ['in the north', 'in the south', 'the Ottoman script', 'Elbasan · Todhri · Vithkuqi'];
 function scripts(T) {
   const q = Q.scripts;
-  type('For centuries,', 6570, 1640, T, q[0] + 0.1, { size: 64, w: 600, col: MUTE }); type('no single\nalphabet.', 6564, 1790, T, q[0] + 0.9, { size: 150, w: 800, lh: 1.02 });
+  type('For centuries,', 6570, 1640, T, q[0] + 0.1, { size: 64, w: 600, col: MUTE }); type('no single\nalphabet.', 6564, 1790, T, q[0] + 1.3, { size: 150, w: 800, lh: 1.02 });
   stop(7900, Y2, T, when(SPX, 7890), INK, 30);
   STR.filter(s => s.base !== undefined).forEach(s => { const i = s.base, t0 = INTRO[i] + 0.25;
     type(NAMES[i], 8400, s.y - 34, T, t0, { size: 58, w: 800 }); sub(NOTES[i], 8402, s.y + 56, T, t0 + 0.25, { size: 30 });
@@ -118,14 +118,14 @@ const T1844 = Q.primer[0] + 1.0, PRIMERS = [['1867–72', 'Kristoforidhi · Gheg
 function primer(T) {
   const q = Q.primer;
   stop(9900, 2260, T, T1844, AMBER); roll('1844', 9884, 2512, T, T1844, { size: 220 });
-  book(10640, 2436, 112, T, T1844 + 0.5, { rules: 0 }); ['𐕰', '𐕱', '𐕲', '𐕳'].forEach((g, j) => glyph(g, 10640 + (j < 2 ? -1 : 1) * (j % 2 ? 76 : 34), 2428, T, T1844 + 1.1 + j * 0.1, { size: 36, fam: 'Vithkuqi', w: 400, col: AMBER }));
-  type('Ëvetar', 10830, 2416, T, T1844 + 0.3, { size: 64, w: 800, t1: q[1] - 0.6 }); sub('The first Albanian primer', 10832, 2470, T, T1844 + 0.5, { t1: q[1] - 0.6 }); sub('by Naum Veqilharxhi, in his own script', 10832, 2518, T, T1844 + 0.65, { t1: q[1] - 0.6 });
-  PRIMERS.forEach(([yr, who], j) => { const x = 11720 + j * 600, t0 = q[1] + 0.9 + j * 0.45;
+  book(10640, 2436, 112, T, T1844 + 2.3, { rules: 0 }); ['𐕰', '𐕱', '𐕲', '𐕳'].forEach((g, j) => glyph(g, 10640 + (j < 2 ? -1 : 1) * (j % 2 ? 76 : 34), 2428, T, T1844 + 2.9 + j * 0.1, { size: 36, fam: 'Vithkuqi', w: 400, col: AMBER }));
+  type('Ëvetar', 10830, 2416, T, T1844 + 2.6, { size: 64, w: 800, t1: q[1] - 0.4 }); sub('The first Albanian primer', 10832, 2470, T, T1844 + 2.8, { t1: q[1] - 0.4 }); sub('by Naum Veqilharxhi, in his own script', 10832, 2518, T, T1844 + 3.0, { t1: q[1] - 0.4 });
+  PRIMERS.forEach(([yr, who], j) => { const x = 11720 + j * 600, t0 = q[1] + 1.4 + j * 0.5;
     rule(x, 1492, x, 2308, ez(T, t0, 0.7), FAINT, 3); book(x, 1396, 56, T, t0 + 0.1, { rules: 0, lw: 5 });
     type(yr, x + 80, 1392, T, t0 + 0.2, { size: 54, w: 800 }); sub(who, x + 81, 1436, T, t0 + 0.35, { size: 30 }); });
-  type('More primers followed', 11700, 2436, T, q[1] + 0.2, { size: 96, w: 800, t1: q[2] - 0.5 }); sub('in different alphabets, and in both dialects', 11705, 2494, T, q[1] + 0.9, { size: 40, t1: q[2] - 0.5 });
-  type('At least six alphabets', 13420, 1440, T, q[2] + 0.9, { size: 120, w: 800 }); sub('in use by the start of the twentieth century', 13426, 1498, T, q[2] + 1.3);
-  STR.forEach((s, i) => { const k = pop(T, q[2] + 1.7 + i * 0.13); if (k <= 0) return;                             // count them
+  type('More primers followed', 11700, 2436, T, q[1] + 0.7, { size: 96, w: 800, t1: q[2] - 0.5 }); sub('in different alphabets, and in both dialects', 11705, 2494, T, q[1] + 1.2, { size: 40, t1: q[2] - 0.5 });
+  type('At least six alphabets', 13420, 1440, T, q[2] + 1.9, { size: 120, w: 800 }); sub('in use by the start of the twentieth century', 13426, 1498, T, q[2] + 2.3);
+  STR.forEach((s, i) => { const k = pop(T, q[2] + 2.6 + i * 0.13); if (k <= 0) return;                             // count them
     disc(14250, s.y, 30 * k, s.col); disc(14250, s.y, 22 * k, PAPER); ctx.save(); ctx.globalAlpha = clamp(k * 2); font(28, 800, 'InterNum', 0); ctx.textAlign = 'center'; ctx.fillStyle = INK; ctx.fillText(i + 1, 14250, s.y + 10); ctx.restore(); });
 }
 
@@ -134,8 +134,8 @@ const HUB = [16700, Y2, 290], NOVOTE = i => (i * 18) % 50 < 18, VOTERS = [...Arr
 const seat = i => { const a = (-90 + (i + 0.5) * 7.2) * Math.PI / 180; return [HUB[0] + HUB[2] * Math.cos(a), HUB[1] + HUB[2] * Math.sin(a)]; };
 const huddle = j => j === 0 ? [HUB[0], HUB[1] - 40] : [HUB[0] + 74 * Math.cos(j * Math.PI / 5), HUB[1] - 40 + 74 * Math.sin(j * Math.PI / 5)];
 function congress(T) {
-  const q = Q.congress, tH = q[0] + 0.7, tSeat = q[0] + 1.9, tVote = q[0] + 3.7, tCom = q[2] + 0.3;
-  roll('1908', 15414, 1650, T, tH, { size: 220 }); type('Manastir', 15420, 1740, T, tH + 0.4, { size: 62, w: 800 }); sub('today Bitola · 14–22 November', 15420 + width('Manastir', 62, 800) + 26, 1740, T, tH + 0.6, { size: 34 });
+  const q = Q.congress, tH = q[0] + 0.7, tSeat = q[0] + 2.7, tVote = q[0] + 5.0, tCom = q[2] + 0.6;
+  roll('1908', 15414, 1650, T, tH, { size: 220 }); type('Manastir', 15420, 1740, T, q[0] + 4.3, { size: 62, w: 800 }); sub('today Bitola · 14–22 November', 15420 + width('Manastir', 62, 800) + 26, 1740, T, q[0] + 5.2, { size: 34 });
   roll('50', 15418, 2112, T, tSeat, { size: 120 }); sub('delegates', 15424, 2162, T, tSeat + 0.2, { size: 32 });
   roll('32', 15758, 2112, T, tVote, { size: 120 }); sub('with a vote', 15764, 2162, T, tVote + 0.2, { size: 32 });
   roll('11', 16078, 2112, T, tCom, { size: 120, col: RED }); sub('on the alphabet\ncommission', 16084, 2162, T, tCom + 0.2, { size: 32, lh: 1.25 });
@@ -143,14 +143,14 @@ function congress(T) {
     if (NOVOTE(i)) { disc(x, y, 12 * k, INK); disc(x, y, 7.5 * k * ez(T, tVote + i * 0.01, 0.4), PAPER); }                // observers become rings
     else if (j < 0) disc(x, y, 12 * k, INK);
     else { const m = io3(prog(T, tCom + 0.3 + j * 0.05, 0.9)), [hx, hy] = huddle(j); disc(lerp(x, hx, m), lerp(y, hy, m), 12 * k + 4 * m, mix(INK, RED, prog(T, tCom + j * 0.04, 0.3))); } }
-  sub('One question', HUB[0], 1826, T, q[1] + 0.2, { align: 'c', w: 600, t1: q[2] - 0.25 }); type('Which\nletters?', HUB[0], 1908, T, q[1] + 1.7, { size: 96, w: 800, align: 'c', lh: 1.0, t1: q[2] - 0.2 });
+  sub('One question', HUB[0], 1826, T, q[1] + 0.2, { align: 'c', w: 600, t1: q[2] - 0.25 }); type('Which\nletters?', HUB[0], 1908, T, q[1] + 1.9, { size: 96, w: 800, align: 'c', lh: 1.0, t1: q[2] - 0.2 });
   type('Commission of 11', HUB[0], 2046, T, tCom + 1.1, { size: 34, w: 700, col: RED, align: 'c' });
-  type('Latin', 17660, 1826, T, q[2] + 3.6, { size: 58, w: 800, col: RED }); type('Istanbul', 17660, 2012, T, q[2] + 3.9, { size: 58, w: 800, col: mix(INK, GREY, prog(T, q[3] + 1.5, 0.8)) });
-  type('Within a few years,', 17020, 1578, T, q[3] + 0.1, { size: 48, w: 600, col: MUTE }); type('one alphabet.', 17014, 1704, T, q[3] + 1.4, { size: 130, w: 800 });
+  type('Latin', 17660, 1826, T, q[2] + 3.4, { size: 58, w: 800, col: RED }); type('Istanbul', 17660, 2012, T, q[2] + 4.8, { size: 58, w: 800, col: mix(INK, GREY, prog(T, q[3] + 1.5, 0.8)) });
+  type('Within a few years,', 17020, 1578, T, q[3] + 0.1, { size: 48, w: 600, col: MUTE }); type('one alphabet.', 17014, 1704, T, q[3] + 2.0, { size: 130, w: 800 });
 }
 
 // ---------- thirty-six letters, on red. Drawn in screen pixels over everything else.
-const FLOOD0 = Q.congress[3] + 3.3, FLOOD1 = Q.letters[2] + 1.3, WH = a => `rgba(255,255,255,${a})`;
+const FLOOD0 = Q.congress[3] + 4.1, FLOOD1 = Q.letters[2] + 1.7, WH = a => `rgba(255,255,255,${a})`;
 function letters(T, c) {
   const q = Q.letters, kin = io3(prog(T, FLOOD0, 0.9)), kout = io3(prog(T, FLOOD1, 0.9)); if (kin <= 0 || kout >= 1) return;
   flood(...(kout > 0 ? toScreen(19350, Y2, c) : toScreen(18700, Y2, c)), kin * (1 - kout), RED);
@@ -172,19 +172,19 @@ function letters(T, c) {
 const WORD = [...'drejtshkrimi'], JIT = WORD.map((_, i) => [Math.sin(i * 12.9898) * 43758.5453 % 1, Math.sin(i * 78.233) * 12543.123 % 1]);     // fixed scatter, -1 to 1
 const T2012 = when(RPX, 21150), T2022 = when(RPX, 22150), TILES = [['Elbasan', '7.0', '2014', '𐔀', 23100], ['Vithkuqi', '14.0', '2021', '𐕰', 23650], ['Todhri', '16.0', '2024', '𐗀', 24200]];
 function today(T) {
-  const q = Q.today, tJ = q[0] - 0.5, tS = q[0] + 3.0;
+  const q = Q.today, tJ = q[0] - 0.5, tS = q[0] + 5.3;
   stop(19350, Y2, T, 0, RED); roll('1972', 19334, 1800, T, tJ, { size: 220 });
-  type('Orthography Congress', 19340, 2016, T, tJ + 0.3, { size: 58, w: 800 }); sub('Tirana · 20–25 November 1972', 19340, 2070, T, tJ + 0.5);
-  font(120, 800, 'Inter', -0.02); let x = 20090; WORD.forEach((ch, i) => { const wch = ctx.measureText(ch).width, k = settle(prog(T, tJ + 0.9 + i * 0.04, 0.4)), m = 1 - clamp(over(prog(T, tS + i * 0.035, 0.6)), 0, 1.1);      // letters out of line, then in line
+  type('Orthography Congress', 19340, 2016, T, q[0] + 2.4, { size: 58, w: 800 }); sub('Tirana · 20–25 November 1972', 19340, 2070, T, q[0] + 2.7);
+  font(120, 800, 'Inter', -0.02); let x = 20090; WORD.forEach((ch, i) => { const wch = ctx.measureText(ch).width, k = settle(prog(T, q[0] + 3.6 + i * 0.04, 0.4)), m = 1 - clamp(over(prog(T, tS + i * 0.035, 0.6)), 0, 1.1);      // letters out of line, then in line
     if (k > 0) { ctx.save(); ctx.translate(x + wch / 2, 1790 + JIT[i][0] * 44 * m); ctx.rotate(JIT[i][1] * 0.32 * m); ctx.globalAlpha = clamp(k * 2); font(120, 800, 'Inter', -0.02); ctx.textAlign = 'center'; ctx.fillStyle = mix(INK, MUTE, m); ctx.fillText(ch, 0, 0); ctx.restore(); }
     x += wch; });
   type('One standard spelling', 20094, 2016, T, tS + 0.5, { size: 46, w: 700, col: RED }); sub('drejtshkrimi: orthography', 20094, 2066, T, tS + 0.8, { size: 30 });
   stop(21150, Y2, T, T2012, RED); roll('2012', 21136, 1800, T, T2012, { size: 170 });
-  type('A shared Abetare', 21140, 2012, T, T2012 + 0.3, { size: 54, w: 800 }); sub('Albania and Kosovo', 21140, 2064, T, T2012 + 0.5);
-  { const k = pop(T, T2012 + 0.5), dx = lerp(150, 52, io3(prog(T, T2012 + 0.9, 1.0))), cx = 21830, cy = 1716, r = 86 * k;                       // two circles that come to share a middle
+  type('A shared Abetare', 21140, 2012, T, T2012 + 2.5, { size: 54, w: 800 }); sub('Albania and Kosovo', 21140, 2064, T, T2012 + 2.8);
+  { const k = pop(T, T2012 + 0.8), dx = lerp(150, 52, io3(prog(T, T2012 + 2.4, 1.0))), cx = 21830, cy = 1716, r = 86 * k;                       // two circles that come to share a middle
     if (k > 0) { ctx.save(); ctx.beginPath(); ctx.arc(cx - dx, cy, r, 0, 7); ctx.clip(); disc(cx + dx, cy, r, RED); ctx.restore(); ring(cx - dx, cy, r, 6, INK); ring(cx + dx, cy, r, 6, INK); } }
-  stop(22150, Y2, T, T2022, RED); roll('2022', 22136, 1800, T, T2022, { size: 170 }); type('A new joint edition', 22140, 2012, T, T2022 + 0.3, { size: 54, w: 800 });
-  sub('The old invented scripts', 22962, 1560, T, q[2] + 0.2, { size: 48, w: 600 }); type('now in Unicode', 22956, 1694, T, q[2] + 1.0, { size: 130, w: 800 }); sub('the standard behind every screen', 23990, 1694, T, q[2] + 3.6);
+  stop(22150, Y2, T, T2022, RED); roll('2022', 22136, 1800, T, T2022, { size: 170 }); type('A new joint edition', 22140, 2012, T, T2022 + 0.9, { size: 54, w: 800 });
+  sub('The old invented scripts', 22962, 1560, T, q[2] + 0.9, { size: 48, w: 600 }); type('now in Unicode', 22956, 1694, T, q[2] + 2.6, { size: 130, w: 800 }); sub('the standard behind every screen', 23990, 1694, T, q[2] + 4.7);
   TILES.forEach(([name, ver, yr, g, tx]) => { const t0 = when(RPX, tx), k = pop(T, t0 + 0.25, 0.5);
     rule(tx, Y2 + 16, tx, 1996, ez(T, t0 + 0.1, 0.3), INK, 4); if (k > 0) box(tx - 95 * k, 1996, 190 * k, 190 * k, 36, INK, { a: clamp(k * 3) });
     glyph(g, tx, 2076, T, t0 + 0.45, { size: 150, fam: name, w: 400, col: PAPER }); stop(tx, Y2, T, t0, AMBER, 20);
@@ -196,13 +196,13 @@ const T2026 = when(RPX, 25050), SLOT = LETTERS.map((_, i) => [BK.x + (i % 12 - 5
 function outro(T) {
   const q = Q.outro;
   stop(25050, Y2, T, T2026, RED); roll('2026', 25036, 1800, T, T2026, { size: 170 }); sub('22 November · Alphabet Day', 25040, 2012, T, T2026 + 0.4, { size: 40, w: 600 });
-  roll('118', 25634, 1812, T, q[0] + 1.2, { size: 330, col: RED, d: 1.3, t1: q[1] - 0.5 }); type('years', 26310, 1812, T, q[0] + 1.9, { size: 100, w: 800, t1: q[1] - 0.55 });
-  type('since the Congress of Manastir', 25646, 2012, T, q[0] + 2.4, { size: 48, w: 700, t1: q[1] - 0.5 });
+  roll('118', 25634, 1812, T, q[0] + 1.7, { size: 330, col: RED, d: 1.3, t1: q[1] - 0.3 }); type('years', 26310, 1812, T, q[0] + 2.8, { size: 100, w: 800, t1: q[1] - 0.35 });
+  type('since the Congress of Manastir', 25646, 2012, T, q[0] + 3.5, { size: 48, w: 700, t1: q[1] - 0.3 });
   rule(BK.x, BK.top + 50, BK.x, BK.bot + 50, ez(T, BOOK1 - 0.1, 0.5), RED, 12);                                    // the spine, once the line has closed the outline
   for (const d of [-1, 1]) for (let j = 0; j < 4; j++) { const r = ez(T, BOOK1 + 0.2 + j * 0.1 + (d > 0 ? 0.35 : 0), 0.5), xa = BK.x + d * 70, yy = 1870 + j * 50; rule(xa, yy - 10, xa + d * 220, yy - 40, r, FAINT, 7); }
-  LETTERS.forEach((l, i) => { const k = settle(prog(T, q[1] + 3.3 + i * 0.045, 0.8)); if (k <= 0) return; const [sx, sy] = SLOT[i];       // the letters rise out of it
+  LETTERS.forEach((l, i) => { const k = settle(prog(T, q[1] + 4.2 + i * 0.045, 0.8)); if (k <= 0) return; const [sx, sy] = SLOT[i];       // the letters rise out of it
     ctx.save(); ctx.translate(lerp(BK.x, sx, k), lerp(BK.top + 30, sy, k) - 60 * Math.sin(Math.PI * k)); ctx.scale(0.3 + 0.7 * k, 0.3 + 0.7 * k); ctx.globalAlpha = clamp(k * 3); font(46, 700, 'Inter', 0); ctx.textAlign = 'center'; ctx.fillStyle = VOWELS.has(l) ? RED : INK; ctx.fillText(l, 0, 15); ctx.restore(); });
-  type('Abetare', BK.x, 2282, T, q[1] + 2.4, { size: 112, w: 800, align: 'c' }); sub('the same 36 letters, every autumn', BK.x, 2340, T, q[1] + 4.2, { align: 'c', size: 38 });
+  type('Abetare', BK.x, 2282, T, q[1] + 3.2, { size: 112, w: 800, align: 'c' }); sub('the same 36 letters, every autumn', BK.x, 2340, T, q[1] + 5.2, { align: 'c', size: 38 });
 }
 
 function draw(T) {

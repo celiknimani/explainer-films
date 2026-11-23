@@ -201,6 +201,10 @@ Rules for this style:
 
 A flat read is usually the voice, not the script. Measured on the same lines, `bf_emma` moves through about 6.6 semitones of pitch, `af_heart` about 9.4 and `af_sarah` about 12. Blending a clean voice with a livelier one keeps the first one's quality and adds movement. Vary the pace too: slow the questions and the closing line by a few percent, and speed up short lists.
 
+### A voice from elsewhere
+
+To use a voice actor, another speech service or a language the built-in voice does not speak, put one audio file per scene in `films/<name>/voice/<scene>.mp3` (or `.wav`, `.m4a`), each reading that scene's phrases from `script.json` in order, and run `python3 tools/voice.py <name>` in place of `npm run narrate`. It writes the same `narr/` files and `cues.json`, finding where each phrase starts by speech recognition (`pip install faster-whisper`; set `"lang"` in `script.json`, for example `"sq"`). It also writes `words.json`, every recognised word with its time, which is what to read when setting offsets inside a phrase. Check its printout: each phrase should begin on the words shown. The recogniser can write a number wrongly as digits even when it is spoken correctly, so confirm numbers by ear or by a second pass. `films/alfabeti-line` is narrated this way.
+
 ## Sound: tools/synth.py
 
 ```python

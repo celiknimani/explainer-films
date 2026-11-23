@@ -76,7 +76,7 @@ Any scene can also be drawn in an isometric view, without perspective, for stack
 ```
 engine/    renderer, overlay graphics, staging, styles, reusable parts
 films/     one folder per film: script.json, cues.json, film.js, audio.py
-tools/     narrate, still, render, mix, preview, new
+tools/     narrate, voice, still, render, mix, preview, new
 docs/      API reference
 skills/    instructions for AI coding agents
 ```

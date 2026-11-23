@@ -1,6 +1,6 @@
 # Sources: the Albanian alphabet as one line
 
-Checked on 23 November 2026. Flat style (`engine/flat.js`). Narration is in English; Albanian names are spelled phonetically in `script.json` so the voice says them roughly right, and correctly on screen.
+Checked on 23 November 2026. Flat style (`engine/flat.js`). Narration is in Albanian (`script.json`), spoken by ElevenLabs v4 through Higgsfield, preset voice Elena, one clip per scene in `voice/`. ElevenLabs does not list Albanian as a supported language, so the clips were checked by speech recognition: the transcript matches the script, and every number was confirmed with digits disabled in the recogniser. The earlier English script is kept as `script.en.json`. On-screen text is in English.
 
 ## Documents
 
