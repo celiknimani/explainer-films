@@ -16,5 +16,6 @@ Rules:
 - Keep reusable models in `engine/parts`, film-specific ones in the film folder.
 - Keep the picture steady (`docs/api.md`, "Keeping the picture steady"): the camera moves one way per shot and never sways, it holds still while text is pinned to a model, idle motion spins or flows instead of bobbing, and small moving objects cast no shadows.
 - When an isometric, 2.5D or exploded-view film is asked for, use `isoKeys` in place of `camKeys`, light with `SUNISO`, and follow "Isometric views" in `docs/api.md`. `films/iso-stack` is the example.
+- When an infographic, motion-graphics, flat, minimal or 2D film is asked for, use `engine/flat.js` in place of the 3D engine and follow "Flat films" in `docs/api.md`: one board, one travelling camera, no cuts, rendered at 30 fps. `films/alfabeti-line` is the example.
 - Give the sound some movement: pick a voice with pitch range (or a blend), vary the pace of phrases, and pass `energy` per scene to `m.music()` so the arrangement rises and falls with the story (`docs/api.md`).
 - Match the existing code style: small pure helpers, no frameworks, no build step.

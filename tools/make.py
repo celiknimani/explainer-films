@@ -1,10 +1,10 @@
 """Run the whole pipeline for a film: narration, render, audio, mix.
-Usage: python3 tools/make.py <film> [--style toon] [--gpu] [--skip-narration]"""
+Usage: python3 tools/make.py <film> [--style toon] [--gpu] [--skip-narration] [--fps 24]"""
 import sys, os, subprocess, argparse
-ap = argparse.ArgumentParser(); ap.add_argument('film'); ap.add_argument('--style', default='toon'); ap.add_argument('--gpu', action='store_true'); ap.add_argument('--skip-narration', action='store_true'); a = ap.parse_args()
+ap = argparse.ArgumentParser(); ap.add_argument('film'); ap.add_argument('--style', default='toon'); ap.add_argument('--gpu', action='store_true'); ap.add_argument('--skip-narration', action='store_true'); ap.add_argument('--fps', default='24'); a = ap.parse_args()
 T = os.path.dirname(os.path.abspath(__file__)); py = sys.executable; run = lambda *c: subprocess.run([py, *c], check=True)
 if not a.skip_narration: run(os.path.join(T, 'narrate.py'), a.film)
-run(os.path.join(T, 'render.py'), a.film, '--style', a.style, *(['--gpu'] if a.gpu else []))
+run(os.path.join(T, 'render.py'), a.film, '--style', a.style, '--fps', a.fps, *(['--gpu'] if a.gpu else []))
 audio = os.path.join(T, '..', 'films', a.film, 'audio.py')
 run(audio) if os.path.exists(audio) else run(os.path.join(T, 'synth.py'), a.film)      # a film without audio.py gets a default soundtrack
 run(os.path.join(T, 'mix.py'), a.film)

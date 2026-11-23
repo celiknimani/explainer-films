@@ -7,7 +7,7 @@ description: Make a narrated explainer, engineering or sales video in code with 
 
 The repo turns a script into a narrated 1080p video. Narration is generated first; its phrase timings (`cues.json`) drive every animation. Scenes are JavaScript functions that draw one frame for a given time. Work inside the repo; if it is not in the workspace, ask where it lives and clone it.
 
-Read `README.md` for setup and `docs/api.md` for the function reference before writing scene code. Read one example film close to the request: `films/kosovo-electricity` and `films/kosovo-finance` (explainer), `films/liburna` (engineering), `films/acme-sales` (sales), `films/iso-stack` and `films/alfabeti` (isometric), `films/starter` (minimal).
+Read `README.md` for setup and `docs/api.md` for the function reference before writing scene code. Read one example film close to the request: `films/kosovo-electricity` and `films/kosovo-finance` (explainer), `films/liburna` (engineering), `films/acme-sales` (sales), `films/iso-stack` and `films/alfabeti` (isometric), `films/alfabeti-line` (flat), `films/starter` (minimal).
 
 ## Procedure
 
@@ -55,6 +55,15 @@ The overlay is fixed to the screen; the 3D scene is not. Small back-and-forth mo
 ## Styles
 
 `--style toon|paper|clay|blueprint|neon` on preview, still and render. Check one still in the chosen style: the line styles only draw outlined models.
+
+## Flat films
+
+When the request is for infographic, motion-graphics, flat, minimal or 2D animation, do not use the 3D engine. Use `engine/flat.js` and read "Flat films" in `docs/api.md` and `films/alfabeti-line` first.
+
+- Find one visual idea that carries the whole story (a line, a grid, a shape that changes) before laying anything out.
+- One board, one camera, no cuts. Each idea gets a stop; `fit()` frames it; the camera travels between stops while the narration moves on.
+- Write one `draw(T)`. Every start time is an absolute cue from `timeline()` plus an offset.
+- Render with `--fps 30` and pass `fps=30` to `Mix`.
 
 ## Isometric films
 

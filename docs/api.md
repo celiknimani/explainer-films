@@ -139,6 +139,52 @@ Rules that make it read as isometric:
 
 The ground fills the frame in this view, so there is no sky or horizon. `grid()` gives the floor some structure.
 
+## Flat films
+
+A second engine, `engine/flat.js`, for infographic motion design: flat shapes, large type, drawn lines, and one camera that travels over a single large board, so there are no cuts. It uses Canvas 2D only and does not load three.js. Nothing from `core.js`, `stage.js` or `overlay.js` is used. `films/alfabeti-line` is the example. A two-minute film renders in about two minutes on two CPU cores.
+
+A flat film is one function of time, not one function per scene:
+
+```js
+import { timeline, camAt, fit, world, clear, dots, type, roll, path, trace, along, slide, when, stop, play, loadJSON } from '../../engine/flat.js';
+const CUES = await loadJSON('./cues.json', import.meta.url), ORDER = ['intro', 'body'];
+const { Q, end } = timeline(ORDER, CUES);            // Q.body[1]: when phrase 1 of "body" starts, in seconds from the start of the film
+const CAMK = [{ t: 0, d: 0, x: 960, y: 540, z: 1 }, { t: Q.body[0] + 0.5, d: 1.8, ...fit(2000, 300, 3600, 900) }];
+const cam = T => camAt(T, CAMK);
+function draw(T) { const c = cam(T); clear(); world(c); dots(c); /* lines, then type */ }
+play(ORDER, CUES, draw, { cam });
+```
+
+Render at 30 frames a second: `npm run film <name> -- --skip-narration --fps 30`, and pass `fps=30` to `Mix` in `audio.py`. Stills work as usual (`npm run still <name> scene:seconds`), with times counted from the start of that scene.
+
+| Function | What it does |
+|---|---|
+| `timeline(order, cues)` | `{ Q, start, end }`: absolute cue times, scene starts, film length |
+| `camAt(T, keys)` | Camera `{ x, y, z }` from keys `{ t, d, x, y, z, lift }`: it arrives at time `t` after travelling `d` seconds and holds until the next move. `lift` pulls the zoom back mid-move (default 0.08) |
+| `fit(x0, y0, x1, y1, pad)` | The camera that frames a rectangle of the board. Spread it into a key |
+| `world(c)`, `screen()` | Draw in board coordinates, or in screen pixels |
+| `toScreen(x, y, c)` | Where a board point is on screen |
+| `clear(col)`, `dots(c)` | Background, and a faint dot grid fixed to the board that shows the camera's movement |
+| `type(s, x, y, T, t0, o)` | Text that rises from behind its baseline, word by word. `o`: `size`, `w`, `col`, `align`, `by` (`word`, `char`, `line`), `gap`, `t1` (when it leaves), `a`, `fam`, `ls`, `lh` |
+| `roll(s, x, y, T, t0, o)` | A number whose digits roll into place, in tabular figures |
+| `path(pts)` | A line through points; a point may carry a corner radius, `[x, y, r]`. `ess(x0, y0, x1, y1)` gives the points of an S-shaped link |
+| `trace(P, s0, s1, o)` | Stroke a path between two distances along it. Animate `s1` to draw the line on |
+| `along(P, x)`, `at(P, s)` | Distance at which a path reaches board x; the point at a distance |
+| `slide(T, keys)`, `when(keys, v)` | A value that moves between holds, `[[t, d, v], ...]`; and the moment it reaches `v` |
+| `stop(x, y, T, t0, col)` | A stop on a line: a ringed dot that pops in with one ripple |
+| `disc`, `ring`, `box`, `rule` | Circle, arc, rounded rectangle, straight line; `ring` and `rule` take a progress value |
+| `flood(sx, sy, k, col)` | A colour that grows from a screen point until it fills the picture, or shrinks back into it |
+| `play(order, cues, draw, { cam, fonts })` | Registers the film. `fonts: [{ family, url, weight }]` are loaded first |
+
+Rules for this style:
+
+- Give every idea one stop. Lay the stops out along a line, give each a rectangle, and let `fit()` frame it. Check each stop with a still.
+- Tie what moves to a line's head: keep head positions in a `slide()` key list and time stops with `when()`, so things appear as the line reaches them.
+- Type is the picture. Use few sizes: one very large for the number or word that matters, one for titles, one for notes in grey.
+- Keep to paper, ink, one accent, and at most three more colours when lines must be told apart.
+- Text that would still be on screen at the next stop needs a `t1`.
+- Motion blur is automatic while the camera moves (`cam` passed to `play`): each frame averages up to 40 moments inside one sixtieth of a second.
+
 ## Narration: script.json
 
 ```json
