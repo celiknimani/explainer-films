@@ -1,6 +1,6 @@
 # Sources: the Albanian alphabet as one line
 
-Checked on 23 November 2026. Same script and narration as `films/alfabeti`; only the picture is new (flat style, `engine/flat.js`). Narration is in English; Albanian names are spelled phonetically in `script.json` so the voice says them roughly right, and correctly on screen.
+Checked on 23 November 2026. Flat style (`engine/flat.js`). Narration is in English; Albanian names are spelled phonetically in `script.json` so the voice says them roughly right, and correctly on screen.
 
 ## Documents
 

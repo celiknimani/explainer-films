@@ -111,7 +111,7 @@ The overlay is fixed to the screen and the 3D scene is not, so any small back-an
 
 ## Isometric views
 
-An isometric view has no perspective: nothing shrinks with distance, so stacks, floors, exploded diagrams and process layouts read like a technical drawing. Use it when someone asks for an isometric, 2.5D or exploded-view film. [`films/iso-stack`](../films/iso-stack) is a working example.
+An isometric view has no perspective: nothing shrinks with distance, so stacks, floors, exploded diagrams and process layouts read like a technical drawing. Use it when someone asks for an isometric, 2.5D or exploded-view film.
 
 A scene becomes isometric by calling `isoKeys` where it would call `camKeys`. Everything else (models, styles, overlay, `proj`, narration cues) is unchanged, and a film can mix both kinds of scene.
 

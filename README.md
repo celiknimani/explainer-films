@@ -8,10 +8,10 @@ Narrated explainer, engineering and sales videos made entirely in code.
 
 You write a script. The narrator's timing drives the animation. A browser renders every frame. Every number, label and camera move lives in text files, so a film is updated by editing and re-rendering.
 
-| Explainer | Engineering | Sales | Isometric | Flat |
-|---|---|---|---|---|
-| ![Explainer](docs/thumbs/explainer.jpg) | ![Engineering](docs/thumbs/engineering.jpg) | ![Sales](docs/thumbs/sales.jpg) | ![Isometric](docs/thumbs/isometric.jpg) | ![Flat](docs/thumbs/flat.jpg) |
-| [`kosovo-electricity`](films/kosovo-electricity), 2 min 56 s | [`liburna`](films/liburna), 2 min 4 s | [`acme-sales`](films/acme-sales), 32 s | [`iso-stack`](films/iso-stack), 27 s | [`alfabeti-line`](films/alfabeti-line), 1 min 54 s |
+| Explainer | Engineering | Sales | Flat |
+|---|---|---|---|
+| ![Explainer](docs/thumbs/explainer.jpg) | ![Engineering](docs/thumbs/engineering.jpg) | ![Sales](docs/thumbs/sales.jpg) | ![Flat](docs/thumbs/flat.jpg) |
+| [`kosovo-electricity`](films/kosovo-electricity), 2 min 56 s | [`liburna`](films/liburna), 2 min 4 s | [`acme-sales`](films/acme-sales), 32 s | [`alfabeti-line`](films/alfabeti-line), 1 min 54 s |
 
 [Install](#install) · [Usage](#usage) · [Styles](#styles) · [Layout](#layout) · [AI agents](#with-an-ai-coding-agent) · [Limits](#limits) · [API](#api) · [Maintainer](#maintainer) · [Credits](#credits) · [Contributing](#contributing) · [License](#license)
 
