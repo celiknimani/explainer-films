@@ -70,7 +70,7 @@ All overlay functions take the scene time `t` and a start time `t0` and animate 
 
 ## engine/parts
 
-**kit.js**: `box(w, h, d, colour, opts)`, `cyl(rTop, rBottom, h, colour, opts)`, `at(object, x, y, z)`, `tm(colour)` cached material, `rnd()` seeded random, `sb(a, b, thickness)` box geometry between two points, `hideInst(instancedMesh)`.
+**kit.js**: `box(w, h, d, colour, opts)`, `cyl(rTop, rBottom, h, colour, opts)`, `prism(w, h, d, colour, opts)` for gable roofs, `at(object, x, y, z)`, `tm(colour)` cached material, `rnd()` seeded random, `sb(a, b, thickness)` box geometry between two points, `hideInst(instancedMesh)`.
 
 **energy.js**: `ctower(height, baseRadius)`, `stack(height, radius, bands)`, `pylons(parent, [[x, z], ...], rotation)` with wires, `turbine(parent, x, y, z, scale)` with `spin(list, gt)` and `popAll(list, t, t0, gap)`, `Puffs(parent, count)` for smoke and steam (`add(position, opts)`, `update(gt)`), `hillMesh(...)`, `farHills(...)`, `dress(parent, count, seed, avoidFn, ...)` for trees and fields.
 

@@ -7,6 +7,9 @@ export const tm = c => MAT[c] || (MAT[c] = toon(c));                       // ca
 export const at = (o, x, y, z) => { o.position.set(x, y, z); return o; };   // position and return
 export const box = (w, h, d, c, o = {}) => M(new THREE.BoxGeometry(w, h, d), typeof c === 'string' ? tm(c) : c, o);
 export const cyl = (rt, rb, h, c, o = {}, seg = 18) => M(new THREE.CylinderGeometry(rt, rb, h, seg), typeof c === 'string' ? tm(c) : c, o);
+// A triangular prism standing on its base, such as a gable roof: w wide, h high, d deep.
+export const prism = (w, h, d, c, o = {}) => { const s = new THREE.Shape(); s.moveTo(-w / 2, 0); s.lineTo(w / 2, 0); s.lineTo(0, h); s.closePath();
+  const g = new THREE.ExtrudeGeometry(s, { depth: d, bevelEnabled: false }); g.translate(0, 0, -d / 2); return M(g, typeof c === 'string' ? tm(c) : c, o); };
 let seed = 5; export const rnd = () => (seed = (seed * 16807) % 2147483647) / 2147483647;   // seeded, so every render is identical
 export const sb = (a, b, th, th2) => new THREE.BoxGeometry(1, 1, 1).applyMatrix4(segMatrix(a, b, th, new THREE.Matrix4(), th2 ?? th));   // box geometry from a to b
 export const hideInst = mesh => { for (let i = 0; i < mesh.count; i++) mesh.setMatrixAt(i, m4.makeScale(0, 0, 0)); mesh.instanceMatrix.needsUpdate = true; };

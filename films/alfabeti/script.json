@@ -1,0 +1,44 @@
+{
+ "voice": "af_heart:0.6+af_sarah:0.4", "lang": "en-us", "speed": 1.04, "hold": 1.1, "tail": 2.6,
+ "scenes": {
+  "title": [
+   { "say": "Thirty-six letters. One sound for each.", "speed": 0.96 },
+   "This is the story of the Albanian alphabet, and of the first book every child opens."
+  ],
+  "early": [
+   "Albanian was spoken long before it was written down.",
+   "The oldest dated line we have is a baptism formula from fourteen sixty-two.",
+   "The first known printed book followed in fifteen fifty-five."
+  ],
+  "scripts": [
+   { "say": "But for centuries, there was no single alphabet.", "speed": 0.98 },
+   "In the north, people wrote with Latin letters. In the south, with Greek ones. Others used Arabic script.",
+   "And some invented alphabets of their own."
+  ],
+  "primer": [
+   "In eighteen forty-four, one of those inventors printed the first Albanian primer, the ahbeh tahreh.",
+   "More primers followed, in different alphabets and in both dialects.",
+   "By the start of the twentieth century, at least six alphabets were in use."
+  ],
+  "congress": [
+   "In November nineteen oh eight, fifty delegates met in Mahnasteer, today's Beetola.",
+   { "say": "They had one question to settle. Which letters?", "speed": 0.97 },
+   "A commission of eleven chose a Latin alphabet, alongside the older Istanbul one.",
+   "Within a few years, only the Latin one was still in use."
+  ],
+  "letters": [
+   "It has thirty-six letters: seven vowels and twenty-nine consonants.",
+   "Nine of them are written as pairs.",
+   "Two carry a mark."
+  ],
+  "today": [
+   "In nineteen seventy-two, a congress in Teerahna agreed on one standard spelling.",
+   "In twenty twelve, Albania and Kosovo presented a shared ahbeh tahreh, and a new joint edition followed in twenty twenty-two.",
+   "Even the old invented scripts now have a place in Unicode, the standard behind every screen."
+  ],
+  "outro": [
+   "This weekend, Albanians marked one hundred and eighteen years since that decision.",
+   { "say": "And every autumn, new first-graders open the ahbeh tahreh, and meet the same thirty-six letters.", "speed": 0.98 }
+  ]
+ }
+}
