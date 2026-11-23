@@ -1,0 +1,130 @@
+{
+ "voice": "af_heart:0.6+af_sarah:0.4",
+ "speed": 1.05,
+ "lang": "en-us",
+ "tail": 2.6,
+ "scenes": {
+  "title": [
+   {
+    "say": "Where does Kosovo keep its money?",
+    "speed": 0.97
+   },
+   "Every year, the central bank publishes the answer. Here is twenty twenty-five."
+  ],
+  "size": [
+   "Add up every bank, pension fund, insurer and lender, and you get fourteen point six billion euros.",
+   "That is about a third more than the whole economy produces in a year.",
+   {
+    "say": "Banks hold two thirds of it.",
+    "speed": 1.08
+   },
+   {
+    "say": "Pension savings hold a quarter.",
+    "speed": 1.08
+   },
+   {
+    "say": "Microfinance and insurance share the rest.",
+    "speed": 1.08
+   }
+  ],
+  "growth": [
+   {
+    "say": "And it is growing. Fast.",
+    "speed": 0.98
+   },
+   "In twenty twenty-one, the total was under nine billion.",
+   "Four years later, it is almost two thirds bigger.",
+   {
+    "say": "Last year alone, it grew by nearly fifteen percent.",
+    "speed": 1.0
+   }
+  ],
+  "banks": [
+   {
+    "say": "Start with the banks. There are ten, and seven belong to foreign groups.",
+    "speed": 1.02
+   },
+   "People and companies have deposited seven point eight billion euros.",
+   "The banks have lent out six point seven billion.",
+   "A little more than half goes to businesses. The rest goes to households, and their share keeps rising.",
+   "The three largest banks hold more than half of all banking assets."
+  ],
+  "rates": [
+   {
+    "say": "So, what does money cost?",
+    "speed": 0.95
+   },
+   "In December, the average interest rate on loans was six point eight percent.",
+   "Savers earned three and a half percent on deposits.",
+   {
+    "say": "The gap between the two widened again.",
+    "speed": 1.0
+   },
+   "Banks made a profit of one hundred and eighty-five million euros, the most in at least ten years."
+  ],
+  "health": [
+   {
+    "say": "Is it safe?",
+    "speed": 0.93
+   },
+   "About two percent of loans are not being repaid on time.",
+   "Banks hold capital worth seventeen percent of their risk-weighted assets.",
+   "And they keep almost three times the liquid reserves the rules require.",
+   {
+    "say": "In the central bank's stress test, the system held up, even in the severe scenario.",
+    "speed": 1.0
+   }
+  ],
+  "pensions": [
+   {
+    "say": "The second pillar is pensions.",
+    "speed": 0.98
+   },
+   "One fund, the Kosovo Pension Savings Trust, holds almost all of it: three point eight billion euros.",
+   {
+    "say": "Four fifths of that money is invested abroad.",
+    "speed": 1.0
+   },
+   "In twenty twenty-five, investments earned three hundred and nine million euros,",
+   "almost as much as workers paid in."
+  ],
+  "others": [
+   {
+    "say": "Insurance is small. Premiums came to one hundred and seventy-nine million euros.",
+    "speed": 1.05
+   },
+   "Nearly half of that is compulsory car insurance. Life insurance is under five percent.",
+   "Microfinance and other non-bank lenders are growing fastest.",
+   {
+    "say": "But their loans cost eighteen percent a year, on average.",
+    "speed": 0.98
+   }
+  ],
+  "payments": [
+   {
+    "say": "The way people pay is changing too.",
+    "speed": 1.0
+   },
+   "The number of debit cards grew by a third in one year, to almost one point nine million.",
+   {
+    "say": "Card payments in shops rose by a third as well.",
+    "speed": 1.08
+   },
+   "More than a million accounts can now be used online.",
+   "Instant payments are being built. Joining the Single Euro Payments Area is still waiting on legislation."
+  ],
+  "outro": [
+   {
+    "say": "What should we watch?",
+    "speed": 0.93
+   },
+   "Household debt rose by almost a fifth in one year.",
+   "The property market leans on money from the diaspora.",
+   "And the central bank expects inflation to rise in twenty twenty-six.",
+   {
+    "say": "For now, the numbers describe a system that is small, built around banks, growing fast, and stable.",
+    "speed": 0.98
+   }
+  ]
+ }
+}

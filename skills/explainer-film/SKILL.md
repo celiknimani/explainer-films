@@ -7,7 +7,7 @@ description: Make a narrated explainer, engineering or sales video in code with 
 
 The repo turns a script into a narrated 1080p video. Narration is generated first; its phrase timings (`cues.json`) drive every animation. Scenes are JavaScript functions that draw one frame for a given time. Work inside the repo; if it is not in the workspace, ask where it lives and clone it.
 
-Read `README.md` for setup and `docs/api.md` for the function reference before writing scene code. Read one example film close to the request: `films/kosovo-electricity` (explainer), `films/liburna` (engineering), `films/acme-sales` (sales), `films/iso-stack` (isometric), `films/starter` (minimal).
+Read `README.md` for setup and `docs/api.md` for the function reference before writing scene code. Read one example film close to the request: `films/kosovo-electricity` and `films/kosovo-finance` (explainer), `films/liburna` (engineering), `films/acme-sales` (sales), `films/iso-stack` (isometric), `films/starter` (minimal).
 
 ## Procedure
 

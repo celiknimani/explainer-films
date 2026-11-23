@@ -104,6 +104,8 @@ Function reference for the engine, parts and sound tools: [`docs/api.md`](docs/a
 
 Built on three.js, the Kokoro voice model, the Inter typeface and Natural Earth map data. Details in [`THIRD_PARTY.md`](THIRD_PARTY.md).
 
+The isometric rules were informed by the isometric skill in [iart-ai/explainer-video-skills](https://github.com/iart-ai/explainer-video-skills) (MIT). No code from it is included.
+
 ## Contributing
 
 Questions and bug reports go in the issue tracker. Pull requests are welcome; see [`CONTRIBUTING.md`](CONTRIBUTING.md).
