@@ -6,6 +6,9 @@ const { THREE, V, W, H, scene, camera, renderer, STYLE } = C;
 export const ground = new THREE.Mesh(new THREE.PlaneGeometry(7000, 7000), C.toon('#A9C07E')); ground.rotation.x = -Math.PI / 2; ground.receiveShadow = true; ground.visible = false; scene.add(ground);
 const skyU = C.sky.material.uniforms;
 export const SUNHI = V(0.45, 0.72, 0.5).normalize(), SUNLOW = V(-0.5, 0.4, 0.6).normalize();
+// For isometric views (isoKeys at the default angle): the top face is lightest, the left face mid and the right face darkest,
+// so every block shows three tones. With the other suns two of the three visible faces come out the same.
+export const SUNISO = V(-0.5, 0.8, 0.25).normalize();
 
 // Point the sun at p and size its shadow box (world units either side of p).
 export function aim(p, size = 60, dir = SUNHI) { C.sun.target.position.copy(p); C.sun.position.copy(p).addScaledVector(dir, 200);

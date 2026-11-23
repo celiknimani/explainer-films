@@ -8,10 +8,10 @@ Narrated explainer, engineering and sales videos made entirely in code.
 
 You write a script. The narrator's timing drives the animation. A browser renders every frame. Every number, label and camera move lives in text files, so a film is updated by editing and re-rendering.
 
-| Explainer | Engineering | Sales |
-|---|---|---|
-| ![Explainer](docs/thumbs/explainer.jpg) | ![Engineering](docs/thumbs/engineering.jpg) | ![Sales](docs/thumbs/sales.jpg) |
-| [`kosovo-electricity`](films/kosovo-electricity), 2 min 56 s | [`liburna`](films/liburna), 2 min 4 s | [`acme-sales`](films/acme-sales), 32 s |
+| Explainer | Engineering | Sales | Isometric |
+|---|---|---|---|
+| ![Explainer](docs/thumbs/explainer.jpg) | ![Engineering](docs/thumbs/engineering.jpg) | ![Sales](docs/thumbs/sales.jpg) | ![Isometric](docs/thumbs/isometric.jpg) |
+| [`kosovo-electricity`](films/kosovo-electricity), 2 min 56 s | [`liburna`](films/liburna), 2 min 4 s | [`acme-sales`](films/acme-sales), 32 s | [`iso-stack`](films/iso-stack), 27 s |
 
 [Install](#install) · [Usage](#usage) · [Styles](#styles) · [Layout](#layout) · [AI agents](#with-an-ai-coding-agent) · [Limits](#limits) · [API](#api) · [Maintainer](#maintainer) · [Credits](#credits) · [Contributing](#contributing) · [License](#license)
 
@@ -66,6 +66,8 @@ npm run film kosovo-electricity -- --style blueprint
 ```
 
 `toon` (default), `paper`, `clay`, `blueprint`, `neon`. Define your own in [`engine/styles.js`](engine/styles.js).
+
+Any scene can also be drawn in an isometric view, without perspective, for stacks, exploded diagrams and process layouts. It works with every style. See [Isometric views](docs/api.md#isometric-views).
 
 ## Layout
 

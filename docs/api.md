@@ -29,6 +29,7 @@ The usual order inside a scene: set the environment, pose the models, set the ca
 | `M(geometry, material, { ol, pos, rot, scale, cast, recv })` | Mesh with shadows and an outline. `ol` is the outline width in pixels, `ol: 0` for none |
 | `outline(mesh, px)` | Add an outline to an existing mesh or instanced mesh |
 | `camKeys(t, keys, frame)` | Camera keyframes: `{ t, p: [x,y,z], l: [x,y,z], f }` for position, look-at and field of view, eased between keys |
+| `isoKeys(t, keys, frame)` | Isometric camera keyframes: `{ t, l: [x,y,z], d, az, el }`. See [Isometric views](#isometric-views) |
 | `proj(vector)` | 3D point to screen pixels: `{ x, y, ok }` |
 | `ease(t, t0, d)` | 0 to 1 starting at `t0` over `d` seconds, decelerating |
 | `pop(t, t0, d)` | 0 to 1 with a small overshoot, for things that appear |
@@ -73,6 +74,8 @@ All overlay functions take the scene time `t` and a start time `t0` and animate 
 
 **energy.js**: `ctower(height, baseRadius)`, `stack(height, radius, bands)`, `pylons(parent, [[x, z], ...], rotation)` with wires, `turbine(parent, x, y, z, scale)` with `spin(list, gt)` and `popAll(list, t, t0, gap)`, `Puffs(parent, count)` for smoke and steam (`add(position, opts)`, `update(gt)`), `hillMesh(...)`, `farHills(...)`, `dress(parent, count, seed, avoidFn, ...)` for trees and fields.
 
+**iso.js**: `slab(w, d, h, colour)` a box that stands on its base, `grid(cells, step, colour)` a floor grid, `lift(parts, base, gap)` to open and close a stack, `drop(t, t0, d, h)` the height of something falling into place.
+
 **sea.js**: `water`, `islands`, `buildShip(config)` returning a ship with oars, sail, crew and wake, `hullGeo`, `hullPoint`, `figure`.
 
 **devices.js**: `laptop()` and `phone()` return `{ g, scr }` where `scr.ctx` is a canvas you draw the interface on, then call `scr.update()`. `laptop().open(angle)` moves the lid and `laptop().point(px, py)` gives the screen position of an interface pixel for callouts. Props: `desk()`, `mug(colour)`, `plant()`.
@@ -105,6 +108,36 @@ The overlay is fixed to the screen and the 3D scene is not, so any small back-an
 - **Idle motion travels or turns one way.** Spinning rotors, flowing coins, rising steam and a turning globe read as life. A model that bobs or rocks about a fixed position on a slow loop reads as wobble.
 - **Moving things cast no shadows unless the shadow is the point.** Coins, sparks, cards and other small items that fly across a scene drag grey blobs over walls and ground, and those read as flicker. Give them `castShadow = false`. Shadows belong to things that stand still or move slowly as a whole.
 - **Check motion, not only layout.** A single still cannot show this. `npm run still my-film scene:6-11` draws six frames across a range; anything that should hold still must sit in the same place in all six.
+
+## Isometric views
+
+An isometric view has no perspective: nothing shrinks with distance, so stacks, floors, exploded diagrams and process layouts read like a technical drawing. Use it when someone asks for an isometric, 2.5D or exploded-view film. [`films/iso-stack`](../films/iso-stack) is a working example.
+
+A scene becomes isometric by calling `isoKeys` where it would call `camKeys`. Everything else (models, styles, overlay, `proj`, narration cues) is unchanged, and a film can mix both kinds of scene.
+
+```js
+import { SUNISO } from '../../engine/stage.js';
+aim(FR.rel(0, 6, 0), 26, SUNISO);
+isoKeys(t, [{ t: 0, l: [0, 3, 0], d: 8 }, { t: q[1], l: [0, 8, 0], d: 12.5 }], FR);
+```
+
+| Key | Meaning |
+|---|---|
+| `l` | The point at the centre of the frame |
+| `d` | Half the height of the view in world units. Smaller is closer; this is the zoom |
+| `az` | Direction the camera looks from, in degrees around the vertical axis. Default 45 |
+| `el` | Elevation in degrees. Default 35.26, true isometric. 30 gives the 2:1 look of pixel-art games |
+
+Rules that make it read as isometric:
+
+- **Three tones per block.** Pass `SUNISO` to `aim()`. The top face comes out lightest, the left mid and the right darkest. With the other suns two visible faces share a tone and blocks look flat.
+- **Show height by lifting, never by scaling.** Move a part up its axis; `lift(parts, base, gap)` opens a whole stack with one number and closes it again at 0.
+- **Build from the bottom.** Deal layers out lowest first with `drop()`, staggered by where they sit, not by the order they were written in.
+- **Only the bottom layer casts a shadow in a stack that opens.** Upper layers would darken everything under them. Set `castShadow = false` on the rest.
+- **Pan and zoom with `l` and `d`; leave `az` and `el` alone within a shot.** The steadiness rules above apply in full: no drifting camera, and the view holds still while labels are pinned to models.
+- **Pin labels to where a part rests,** not to where it is this frame, if the part pulses or lifts.
+
+The ground fills the frame in this view, so there is no sky or horizon. `grid()` gives the floor some structure.
 
 ## Narration: script.json
 

@@ -1,13 +1,13 @@
 ---
 name: explainer-film
-description: Make a narrated explainer, engineering or sales video in code with the explainer-films repo (three.js scenes timed to narration cues). Use when asked for an animated explainer, a product video or a code-made film.
+description: Make a narrated explainer, engineering or sales video in code with the explainer-films repo (three.js scenes timed to narration cues), in a perspective or an isometric view. Use when asked for an animated explainer, a product video, an isometric or exploded-view animation, or a code-made film.
 ---
 
 # Making a film with explainer-films
 
 The repo turns a script into a narrated 1080p video. Narration is generated first; its phrase timings (`cues.json`) drive every animation. Scenes are JavaScript functions that draw one frame for a given time. Work inside the repo; if it is not in the workspace, ask where it lives and clone it.
 
-Read `README.md` for setup and `docs/api.md` for the function reference before writing scene code. Read one example film close to the request: `films/kosovo-electricity` (explainer), `films/liburna` (engineering), `films/acme-sales` (sales), `films/starter` (minimal).
+Read `README.md` for setup and `docs/api.md` for the function reference before writing scene code. Read one example film close to the request: `films/kosovo-electricity` (explainer), `films/liburna` (engineering), `films/acme-sales` (sales), `films/iso-stack` (isometric), `films/starter` (minimal).
 
 ## Procedure
 
@@ -55,6 +55,17 @@ The overlay is fixed to the screen; the 3D scene is not. Small back-and-forth mo
 ## Styles
 
 `--style toon|paper|clay|blueprint|neon` on preview, still and render. Check one still in the chosen style: the line styles only draw outlined models.
+
+## Isometric films
+
+Use the isometric view when the request says isometric, 2.5D, exploded view, tech stack, floor plan or "like a technical drawing". It suits things made of layers and blocks; landscapes and anything with a horizon belong in the normal perspective view.
+
+- Call `isoKeys(t, [{ t, l, d }], frame)` where a scene would call `camKeys`. `l` is the centre of the frame and `d` the zoom (half the view's height). Leave the angles at their defaults.
+- Light with `aim(point, size, SUNISO)` so every block shows three tones: top lightest, left mid, right darkest.
+- Show height by lifting parts, never by scaling them. `lift(parts, base, gap)` opens and closes a stack; `drop()` deals layers in from the bottom up.
+- In a stack that opens, only the bottom layer casts a shadow.
+- Pan and zoom only. No camera drift, and hold the view while labels are pinned.
+- Build models from `slab()`, `box()` and `cyl()`; add `grid()` for the floor.
 
 ## Sound with some movement
 

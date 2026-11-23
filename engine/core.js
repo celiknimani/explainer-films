@@ -153,5 +153,24 @@ export function camKeys(t, keys, frame) {   // keys: {t, p:[x,y,z], l:[x,y,z], f
   const P = frame ? frame.rel(...p) : V(...p), Lk = frame ? frame.rel(...l) : V(...l);
   camera.position.copy(P); camera.up.set(0, 1, 0); camera.lookAt(Lk); return { P, L: Lk };
 }
+// ---------- isometric camera
+// A parallel view: nothing shrinks with distance, and at the default angles the three axes are equally foreshortened.
+// keys: { t, l: [x, y, z], d, az, el }. l is the centre of the view; d is half the view's height in world units (smaller is closer);
+// az and el are degrees. el defaults to true isometric (35.26); 30 gives the 2:1 "pixel art" look. Only l and d need to be given.
+// The same camera object is kept and only its projection is replaced, so proj(), outlines and the overlay work as usual,
+// and a scene that calls camKeys() is back in perspective.
+export const ISO = Math.atan(Math.SQRT1_2) * 180 / Math.PI, ISO_DIST = 150;
+export function isoKeys(t, keys, frame) {
+  let a = keys[0], b = keys[0], k = 0;
+  if (t >= keys[keys.length - 1].t) a = b = keys[keys.length - 1];
+  else for (let i = 0; i < keys.length - 1; i++) if (t >= keys[i].t && t <= keys[i + 1].t) { a = keys[i]; b = keys[i + 1]; k = camEase((t - a.t) / Math.max(1e-6, b.t - a.t)); break; }
+  const l = [0, 1, 2].map(i => lerp(a.l[i], b.l[i], k)), d = lerp(a.d || 10, b.d || 10, k), rad = Math.PI / 180;
+  const az = lerp(a.az ?? 45, b.az ?? 45, k) * rad, el = lerp(a.el ?? ISO, b.el ?? ISO, k) * rad;
+  const p = [l[0] + ISO_DIST * Math.sin(az) * Math.cos(el), l[1] + ISO_DIST * Math.sin(el), l[2] + ISO_DIST * Math.cos(az) * Math.cos(el)];
+  const P = frame ? frame.rel(...p) : V(...p), Lk = frame ? frame.rel(...l) : V(...l);
+  camera.position.copy(P); camera.up.set(0, 1, 0); camera.lookAt(Lk);
+  camera.projectionMatrix.makeOrthographic(-d * W / H, d * W / H, d, -d, 1, ISO_DIST * 2); camera.projectionMatrixInverse.copy(camera.projectionMatrix).invert();
+  return { P, L: Lk, d };
+}
 export function proj(v) { const p = v.clone().project(camera); return { x: (p.x * 0.5 + 0.5) * W, y: (-p.y * 0.5 + 0.5) * H, ok: p.z < 1 }; }
 export { THREE, mergeGeometries };
